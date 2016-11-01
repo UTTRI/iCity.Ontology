@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AssertHelper.cs" />
     <Compile Include="Foundational\Location\PointTests.cs" />
     <Compile Include="Foundational\Time\InstantTests.cs" />
     <Compile Include="Foundational\Time\IntervalTests.cs" />

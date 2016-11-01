@@ -110,22 +110,65 @@ namespace iCity.Ontology.Foundational.Time
 
         public override bool Starts(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Equals(instant);
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Time == interval.Start;
+            }
+            return false;
         }
 
         public override bool Finishes(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Equals(instant);
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Time == interval.End;
+            }
+            return false;
         }
 
         public override bool Overlaps(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            // Nothing can be during an instant
+            return false;
         }
 
         public override bool Equals(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            // Nothing can be during an instant
+            var instant = other as Instant;
+            if(instant != null)
+            {
+                return Time == instant.Time;
+            }
+            return false;
         }
     }
 }
