@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 namespace iCity.Ontology.Foundational.Time
 {
     /// <summary>
-    /// An entity that ocures in time.
+    /// An entity that occurs in time.
     /// </summary>
     public abstract class TemporalEntity
     {
@@ -45,17 +45,17 @@ namespace iCity.Ontology.Foundational.Time
         public abstract bool HasDuration { get; }
 
         /// <summary>
-        /// Does this even ocure before the given entity.
+        /// Does this even occur before the given entity.
         /// </summary>
         /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this entity ocures before the other.</returns>
+        /// <returns>True if this entity occurs before the other.</returns>
         public abstract bool Before(TemporalEntity other);
 
         /// <summary>
-        /// Does this even ocure after the given entity.
+        /// Does this even occur after the given entity.
         /// </summary>
         /// <param name="other">The entity to compare against</param>
-        /// <returns>True if this entity ocures after the other.</returns>
+        /// <returns>True if this entity occurs after the other.</returns>
         public abstract bool After(TemporalEntity other);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace iCity.Ontology.Foundational.Time
         }
 
         /// <summary>
-        /// If there is a section of this entity that ocures at the same time as the other entity.
+        /// If there is a section of this entity that occurs at the same time as the other entity.
         /// </summary>
         /// <param name="other">The entity to compare against.</param>
         /// <returns>True if this is the case.</returns>
@@ -122,7 +122,7 @@ namespace iCity.Ontology.Foundational.Time
         }
 
         /// <summary>
-        /// If this entity is entirly contained inthe other entity.
+        /// If this entity is entirely contained in the other entity.
         /// </summary>
         /// <param name="other">The entity to compare against.</param>
         /// <returns>True if this is the case.</returns>

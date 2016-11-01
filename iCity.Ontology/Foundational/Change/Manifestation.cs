@@ -40,7 +40,7 @@ namespace iCity.Ontology.Foundational.Change
         /// <summary>
         /// Create a clone of the type replicating the current state in order to continue
         /// </summary>
-        /// <returns>A new manifistation</returns>
+        /// <returns>A new manifestation</returns>
         protected abstract Manifestation<T> DeepClone();
     }
 }
