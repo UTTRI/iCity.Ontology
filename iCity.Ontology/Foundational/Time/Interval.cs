@@ -86,9 +86,37 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                return End <= interval.Start;
+                return Before(interval);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Does this even occur before the given entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this entity occurs before the other.</returns>
+        public bool Before(Interval other)
+        {
+            if(other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return End <= other.Start;
+        }
+
+        /// <summary>
+        /// Does this even occur after the given entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against</param>
+        /// <returns>True if this entity occurs after the other.</returns>
+        public bool After(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Before(this);
         }
 
         public override bool During(TemporalEntity other)
@@ -105,9 +133,23 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                return Start >= interval.Start && End <= interval.End;
+                return During(interval);
             }
             return false;
+        }
+
+        /// <summary>
+        /// If this entity is entirely contained in the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool During(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return Start >= other.Start && End <= other.End;
         }
 
         public override bool Equals(TemporalEntity other)
@@ -129,9 +171,28 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                return Start == interval.Start && End == interval.End;
+                return Equals(interval);
             }
             return false;
+        }
+
+        /// <summary>
+        /// If this entity is the same as another
+        /// </summary>
+        /// <param name="other">The entity to check against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Equals(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            // Shortcut in case we are the same object
+            if (this == other)
+            {
+                return true;
+            }
+            return Start == other.Start && End == other.End;
         }
 
         public override bool Finishes(TemporalEntity other)
@@ -148,9 +209,37 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                return End == interval.End;
+                return Finishes(interval);
             }
             return false;
+        }
+
+        /// <summary>
+        /// If the other entity ends at the same time.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Finishes(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return End == other.End;
+        }
+
+        /// <summary>
+        /// If the this ends at the same time as the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool FinishedBy(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Finishes(this);
         }
 
         public override bool Overlaps(TemporalEntity other)
@@ -167,20 +256,48 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                Interval first, second;
-                if(Start < interval.Start)
-                {
-                    first = this;
-                    second = interval;
-                }
-                else
-                {
-                    first = interval;
-                    second = this;
-                }
-                return first.End > second.Start;
+                return Overlaps(interval);
             }
             return false;
+        }
+
+        /// <summary>
+        /// If there is a section of this entity that occurs at the same time as the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Overlaps(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            Interval first, second;
+            if (Start < other.Start)
+            {
+                first = this;
+                second = other;
+            }
+            else
+            {
+                first = other;
+                second = this;
+            }
+            return first.End > second.Start;
+        }
+
+        /// <summary>
+        /// If the this ends at the same time as the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool OverlappedBy(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Overlaps(this);
         }
 
         public override bool Starts(TemporalEntity other)
@@ -189,17 +306,57 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Start == instant.Time;
-            }
             var interval = other as Interval;
             if (interval != null)
             {
-                return Start == interval.Start;
+                return Starts(interval);
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Starts(interval);
             }
             return false;
         }
+
+        /// <summary>
+        /// If the other entity starts at the same time.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Starts(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return Start == other.Start;
+        }
+
+        /// <summary>
+        /// If this entity follows or is followed directly by the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Meets(Interval other)
+        {
+
+            return (Start == other.End || End == other.Start);
+        }
+
+        /// <summary>
+        /// If this entity follows or is followed directly by the other entity.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool MetBy(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Meets(this);
+        }
+
     }
 }

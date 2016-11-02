@@ -155,6 +155,5 @@ namespace iCity.Ontology.Foundational.Time
         /// <param name="other">The entity to check against.</param>
         /// <returns>True if this is the case.</returns>
         public abstract bool Equals(TemporalEntity other);
-
     }
 }
