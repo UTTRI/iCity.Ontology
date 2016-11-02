@@ -56,7 +56,14 @@ namespace iCity.Ontology.Foundational.Time
         /// </summary>
         /// <param name="other">The entity to compare against</param>
         /// <returns>True if this entity occurs after the other.</returns>
-        public abstract bool After(TemporalEntity other);
+        public bool After(TemporalEntity other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Before(this);
+        }
 
         /// <summary>
         /// If the other entity starts at the same time.

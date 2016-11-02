@@ -79,32 +79,22 @@ namespace iCity.Ontology.Foundational.Time
             throw new InvalidOperationException($"Unable to compare a this Instant to a {other.GetType().FullName}!");
         }
 
-        public override bool After(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if(instant != null)
-            {
-                return Time > instant.Time;
-            }
-            var interval = other as Interval;
-            if(interval != null)
-            {
-                return Time > interval.End;
-            }
-            throw new InvalidOperationException($"Unable to compare a this Instant to a {other.GetType().FullName}!");
-        }
-
         public override bool During(TemporalEntity other)
         {
             if (other == null)
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            // Nothing can be during an instant
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Equals(instant);
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Time == interval.Start && interval.Duration == TimeSpan.Zero;
+            }
             return false;
         }
 
@@ -152,7 +142,11 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            // Nothing can be during an instant
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Equals(instant);
+            }
             return false;
         }
 
@@ -162,11 +156,21 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
+            // Shortcut in case we are the same object
+            if (this == other)
+            {
+                return true;
+            }
             // Nothing can be during an instant
             var instant = other as Instant;
             if(instant != null)
             {
                 return Time == instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Time == interval.Start && interval.Duration == TimeSpan.Zero;
             }
             return false;
         }

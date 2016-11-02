@@ -74,37 +74,132 @@ namespace iCity.Ontology.Foundational.Time
 
         public override bool Before(TemporalEntity other)
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool After(TemporalEntity other)
-        {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return End <= instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return End <= interval.Start;
+            }
+            return false;
         }
 
         public override bool During(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Duration == TimeSpan.Zero && Start == instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Start >= interval.Start && End <= interval.End;
+            }
+            return false;
         }
 
         public override bool Equals(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            // Shortcut in case we are the same object
+            if(this == other)
+            { 
+                return true;
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Duration == TimeSpan.Zero && Start == instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Start == interval.Start && End == interval.End;
+            }
+            return false;
         }
 
         public override bool Finishes(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return End == instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return End == interval.End;
+            }
+            return false;
         }
 
         public override bool Overlaps(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Start <= instant.Time && instant.Time <= End;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                Interval first, second;
+                if(Start < interval.Start)
+                {
+                    first = this;
+                    second = interval;
+                }
+                else
+                {
+                    first = interval;
+                    second = this;
+                }
+                return first.End > second.Start;
+            }
+            return false;
         }
 
         public override bool Starts(TemporalEntity other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            var instant = other as Instant;
+            if (instant != null)
+            {
+                return Start == instant.Time;
+            }
+            var interval = other as Interval;
+            if (interval != null)
+            {
+                return Start == interval.Start;
+            }
+            return false;
         }
     }
 }

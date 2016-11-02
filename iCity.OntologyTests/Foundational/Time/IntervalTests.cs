@@ -32,49 +32,110 @@ namespace iCity.Ontology.Foundational.Time.Tests
         [TestMethod()]
         public void IntervalTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var interval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            Assert.AreEqual(baseTime, interval.Start);
+            Assert.AreEqual(baseTime + TimeSpan.FromMinutes(5), interval.End);
+            Assert.AreEqual(TimeSpan.FromMinutes(5), interval.End - interval.Start);
         }
 
         [TestMethod()]
         public void BeforeTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            Assert.IsTrue(baseInterval.Before(after5));
+            Assert.IsFalse(baseInterval.Before(baseInterval));
+            Assert.IsFalse(after5.Before(baseInterval));
         }
 
         [TestMethod()]
         public void AfterTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            Assert.IsFalse(baseInterval.After(after5));
+            Assert.IsFalse(baseInterval.After(baseInterval));
+            Assert.IsTrue(after5.After(baseInterval));
         }
 
         [TestMethod()]
         public void DuringTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            Assert.IsFalse(baseInterval.During(after5));
+            Assert.IsTrue(baseInterval.During(baseInterval));
+            Assert.IsFalse(baseInterval.During(after2));
+            Assert.IsFalse(after5.During(baseInterval));
+            Assert.IsTrue(after2.During(baseInterval));
+            Assert.IsFalse(after2.During(after5));
         }
 
         [TestMethod()]
         public void EqualsTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var baseIntervalClone = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            Assert.IsFalse(baseInterval.Equals(after5));
+            Assert.IsTrue(baseInterval.Equals(baseInterval));
+            Assert.IsTrue(baseInterval.Equals(baseIntervalClone));
+            Assert.IsFalse(after5.Equals(baseInterval));
         }
 
         [TestMethod()]
         public void FinishesTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var elongated = new Interval(baseTime - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            Assert.IsFalse(baseInterval.Finishes(after5));
+            Assert.IsTrue(baseInterval.Finishes(baseInterval));
+            Assert.IsFalse(after5.Finishes(baseInterval));
+            Assert.IsFalse(after2.Finishes(baseInterval));
+            Assert.IsFalse(after2.Finishes(after5));
+            Assert.IsTrue(baseInterval.Finishes(elongated));
+            Assert.IsTrue(elongated.Finishes(baseInterval));
         }
 
         [TestMethod()]
         public void OverlapsTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            Assert.IsFalse(baseInterval.Overlaps(after5));
+            Assert.IsTrue(baseInterval.Overlaps(baseInterval));
+            Assert.IsTrue(baseInterval.Overlaps(after2));
+            Assert.IsFalse(after5.Overlaps(baseInterval));
+            Assert.IsTrue(after2.Overlaps(baseInterval));
+            Assert.IsFalse(after2.Overlaps(after5));
         }
 
         [TestMethod()]
         public void StartsTest()
         {
-            Assert.Fail();
+            var baseTime = DateTime.Now;
+            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var elongatedBaseInterval = new Interval(baseTime, TimeSpan.FromMinutes(10));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            Assert.IsFalse(baseInterval.Starts(after5));
+            Assert.IsTrue(baseInterval.Starts(baseInterval));
+            Assert.IsFalse(after5.Starts(baseInterval));
+            Assert.IsFalse(after2.Starts(baseInterval));
+            Assert.IsFalse(after2.Starts(after5));
+            Assert.IsTrue(baseInterval.Starts(elongatedBaseInterval));
+            Assert.IsTrue(elongatedBaseInterval.Starts(baseInterval));
         }
     }
 }
