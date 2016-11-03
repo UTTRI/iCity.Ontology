@@ -69,7 +69,7 @@ namespace iCity.Ontology.Foundational.Time.Tests
             var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
             var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
             Assert.IsFalse(baseInterval.During(after5));
-            Assert.IsTrue(baseInterval.During(baseInterval));
+            Assert.IsFalse(baseInterval.During(baseInterval));
             Assert.IsFalse(baseInterval.During(after2));
             Assert.IsFalse(after5.During(baseInterval));
             Assert.IsTrue(after2.During(baseInterval));
