@@ -118,5 +118,27 @@ namespace iCity.Ontology.Foundational.Time
             }
             return interval.Start < Time && Time < interval.End;
         }
+
+        /// <summary>
+        /// Creates a new instant with the given delta
+        /// </summary>
+        /// <param name="us">The Instant in question.</param>
+        /// <param name="delta">The delta to apply to the instant.</param>
+        /// <returns>A new instant with the given shift</returns>
+        public static Instant operator+(Instant us, TimeSpan delta)
+        {
+            return new Instant(us.Time + delta);
+        }
+
+        /// <summary>
+        /// Creates a new instant with the opposite of the given delta
+        /// </summary>
+        /// <param name="us">The Instant in question.</param>
+        /// <param name="delta">The delta to apply to the instant.</param>
+        /// <returns>A new instant with the opposite of the given shift</returns>
+        public static Instant operator -(Instant us, TimeSpan delta)
+        {
+            return new Instant(us.Time - delta);
+        }
     }
 }
