@@ -98,12 +98,12 @@ namespace iCity.Ontology.Foundational.Time.Tests
             var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
             var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
             Assert.IsFalse(baseInterval.Finishes(after5));
-            Assert.IsTrue(baseInterval.Finishes(baseInterval));
+            Assert.IsFalse(baseInterval.Finishes(baseInterval));
             Assert.IsFalse(after5.Finishes(baseInterval));
             Assert.IsFalse(after2.Finishes(baseInterval));
             Assert.IsFalse(after2.Finishes(after5));
             Assert.IsTrue(baseInterval.Finishes(elongated));
-            Assert.IsTrue(elongated.Finishes(baseInterval));
+            Assert.IsFalse(elongated.Finishes(baseInterval));
         }
 
         [TestMethod()]
@@ -130,12 +130,12 @@ namespace iCity.Ontology.Foundational.Time.Tests
             var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
             var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
             Assert.IsFalse(baseInterval.Starts(after5));
-            Assert.IsTrue(baseInterval.Starts(baseInterval));
+            Assert.IsFalse(baseInterval.Starts(baseInterval));
             Assert.IsFalse(after5.Starts(baseInterval));
             Assert.IsFalse(after2.Starts(baseInterval));
             Assert.IsFalse(after2.Starts(after5));
             Assert.IsTrue(baseInterval.Starts(elongatedBaseInterval));
-            Assert.IsTrue(elongatedBaseInterval.Starts(baseInterval));
+            Assert.IsFalse(elongatedBaseInterval.Starts(baseInterval));
         }
     }
 }

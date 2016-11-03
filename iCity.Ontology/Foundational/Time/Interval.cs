@@ -29,7 +29,7 @@ namespace iCity.Ontology.Foundational.Time
     {
         public DateTime Start { get; private set; }
 
-        public TimeSpan Duration { get; private set; }
+        private readonly TimeSpan Duration;
 
         public DateTime End { get { return Start + Duration; } }
 
@@ -48,27 +48,27 @@ namespace iCity.Ontology.Foundational.Time
             Duration = duration;
         }
 
-        public override bool HasBeginning
+        public override Instant HasBeginning
         {
             get
             {
-                return true;
+                return new Instant(Start);
             }
         }
 
-        public override bool HasDuration
+        public override TimeSpan HasDuration
         {
             get
             {
-                return true;
+                return Duration;
             }
         }
 
-        public override bool HasEnding
+        public override Instant HasEnding
         {
             get
             {
-                return true;
+                return new Instant(End);
             }
         }
 
@@ -119,25 +119,6 @@ namespace iCity.Ontology.Foundational.Time
             return other.Before(this);
         }
 
-        public override bool During(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Duration == TimeSpan.Zero && Start == instant.Time;
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return During(interval);
-            }
-            return false;
-        }
-
         /// <summary>
         /// If this entity is entirely contained in the other entity.
         /// </summary>
@@ -149,7 +130,21 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            return Start >= other.Start && End <= other.End;
+            return Start > other.Start && End < other.End;
+        }
+
+        /// <summary>
+        /// If this entity fully exists around the given interval.
+        /// </summary>
+        /// <param name="other">The entity to compare against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Contains(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.During(this);
         }
 
         public override bool Equals(TemporalEntity other)
@@ -195,24 +190,6 @@ namespace iCity.Ontology.Foundational.Time
             return Start == other.Start && End == other.End;
         }
 
-        public override bool Finishes(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return End == instant.Time;
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Finishes(interval);
-            }
-            return false;
-        }
 
         /// <summary>
         /// If the other entity ends at the same time.
@@ -225,7 +202,7 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            return End == other.End;
+            return End == other.End && Start > other.Start;
         }
 
         /// <summary>
@@ -240,25 +217,6 @@ namespace iCity.Ontology.Foundational.Time
                 throw new ArgumentNullException(nameof(other));
             }
             return other.Finishes(this);
-        }
-
-        public override bool Overlaps(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Start <= instant.Time && instant.Time <= End;
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Overlaps(interval);
-            }
-            return false;
         }
 
         /// <summary>
@@ -300,25 +258,6 @@ namespace iCity.Ontology.Foundational.Time
             return other.Overlaps(this);
         }
 
-        public override bool Starts(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Starts(interval);
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Starts(interval);
-            }
-            return false;
-        }
-
         /// <summary>
         /// If the other entity starts at the same time.
         /// </summary>
@@ -330,7 +269,21 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            return Start == other.Start;
+            return Start == other.Start && End < other.End;
+        }
+
+        /// <summary>
+        /// If the other entity starts at the same time.
+        /// </summary>
+        /// <param name="other">The entity to compare against</param>
+        /// <returns>True if this is the case.</returns>
+        public bool StartedBy(Interval other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+            return other.Starts(this);
         }
 
         /// <summary>

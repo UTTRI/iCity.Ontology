@@ -65,58 +65,6 @@ namespace iCity.Ontology.Foundational.Time.Tests
         }
 
         [TestMethod()]
-        public void DuringInstantTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.During(plusFiveMinutes));
-            Assert.IsTrue(baseTime.During(baseTime));
-            Assert.IsFalse(plusFiveMinutes.During(baseTime));
-            Assert.IsTrue(plusFiveMinutes.During(plusFiveMinutes));
-            AssertHelper.FailsWith<ArgumentNullException>(() => baseTime.During(null));
-        }
-
-        [TestMethod()]
-        public void StartsInstantTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.Starts(plusFiveMinutes));
-            Assert.IsTrue(baseTime.Starts(baseTime));
-            Assert.IsFalse(plusFiveMinutes.Starts(baseTime));
-            Assert.IsTrue(plusFiveMinutes.Starts(plusFiveMinutes));
-            AssertHelper.FailsWith<ArgumentNullException>(() => baseTime.Starts(null));
-        }
-
-        [TestMethod()]
-        public void FinishesInstantTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.Finishes(plusFiveMinutes));
-            Assert.IsTrue(baseTime.Finishes(baseTime));
-            Assert.IsFalse(plusFiveMinutes.Finishes(baseTime));
-            Assert.IsTrue(plusFiveMinutes.Finishes(plusFiveMinutes));
-            AssertHelper.FailsWith<ArgumentNullException>(() => baseTime.Finishes(null));
-        }
-
-        [TestMethod()]
-        public void OverlapsInstantTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.Overlaps(plusFiveMinutes));
-            Assert.IsTrue(baseTime.Overlaps(baseTime));
-            Assert.IsFalse(plusFiveMinutes.Overlaps(baseTime));
-            Assert.IsTrue(plusFiveMinutes.Overlaps(plusFiveMinutes));
-            AssertHelper.FailsWith<ArgumentNullException>(() => baseTime.Overlaps(null));
-        }
-
-        [TestMethod()]
         public void EqualsInstantTest()
         {
             var now = DateTime.Now;
@@ -156,60 +104,6 @@ namespace iCity.Ontology.Foundational.Time.Tests
         }
 
         [TestMethod()]
-        public void DuringIntervalTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var baseInterval = new Interval(now, TimeSpan.FromMinutes(0));
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3));
-            Assert.IsFalse(baseTime.During(plusFiveMinutes));
-            Assert.IsFalse(baseTime.During(plusFiveMinutesAfter));
-            Assert.IsFalse(baseTime.During(plusFiveMinutesBefore));
-            Assert.IsTrue(baseTime.During(baseInterval));
-        }
-
-        [TestMethod()]
-        public void StartsIntervalTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3));
-            Assert.IsTrue(baseTime.Starts(plusFiveMinutes));
-            Assert.IsFalse(baseTime.Starts(plusFiveMinutesAfter));
-            Assert.IsFalse(baseTime.Starts(plusFiveMinutesBefore));
-        }
-
-        [TestMethod()]
-        public void FinishesIntervalTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.Finishes(plusFiveMinutes));
-            Assert.IsFalse(baseTime.Finishes(plusFiveMinutesAfter));
-            Assert.IsTrue(baseTime.Finishes(plusFiveMinutesBefore));
-        }
-
-        [TestMethod()]
-        public void OverlapsIntervalTest()
-        {
-            var now = DateTime.Now;
-            var baseTime = new Instant(now);
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            Assert.IsFalse(baseTime.Finishes(plusFiveMinutes));
-            Assert.IsFalse(baseTime.Finishes(plusFiveMinutesAfter));
-            Assert.IsTrue(baseTime.Finishes(plusFiveMinutesBefore));
-        }
-
-        [TestMethod()]
         public void EqualsIntervalTest()
         {
             var now = DateTime.Now;
@@ -222,6 +116,19 @@ namespace iCity.Ontology.Foundational.Time.Tests
             Assert.IsFalse(baseTime.Equals(plusFiveMinutesAfter));
             Assert.IsFalse(baseTime.Equals(plusFiveMinutesBefore));
             Assert.IsTrue(baseTime.Equals(baseInterval));
+        }
+
+        [TestMethod()]
+        public void InsideTest()
+        {
+            var now = DateTime.Now;
+            var baseTime = new Instant(now);
+            var baseTimePlusTwoMinutes = new Instant(now + TimeSpan.FromMinutes(2));
+            var baseTimePlusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
+            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
+            Assert.IsFalse(baseTime.Inside(plusFiveMinutes));
+            Assert.IsFalse(baseTimePlusFiveMinutes.Inside(plusFiveMinutes));
+            Assert.IsTrue(baseTimePlusTwoMinutes.Inside(plusFiveMinutes));
         }
     }
 }

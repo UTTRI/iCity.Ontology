@@ -32,17 +32,17 @@ namespace iCity.Ontology.Foundational.Time
         /// <summary>
         /// The entity has a beginning.
         /// </summary>
-        public abstract bool HasBeginning { get; }
+        public abstract Instant HasBeginning { get; }
 
         /// <summary>
         /// The entity has an ending
         /// </summary>
-        public abstract bool HasEnding { get; }
+        public abstract Instant HasEnding { get; }
 
         /// <summary>
         /// The entity has a duration
         /// </summary>
-        public abstract bool HasDuration { get; }
+        public abstract TimeSpan HasDuration { get; }
 
         /// <summary>
         /// Does this even occur before the given entity.
@@ -63,90 +63,6 @@ namespace iCity.Ontology.Foundational.Time
                 throw new ArgumentNullException(nameof(other));
             }
             return other.Before(this);
-        }
-
-        /// <summary>
-        /// If the other entity starts at the same time.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public abstract bool Starts(TemporalEntity other);
-
-        /// <summary>
-        /// If the other entity starts at the same time.
-        /// </summary>
-        /// <param name="other">The entity to compare against</param>
-        /// <returns>True if this is the case.</returns>
-        public bool StartedBy(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            return other.Starts(this);
-        }
-
-        /// <summary>
-        /// If the other entity ends at the same time.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public abstract bool Finishes(TemporalEntity other);
-
-        /// <summary>
-        /// If the this ends at the same time as the other entity.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public bool FinishedBy(TemporalEntity other)
-        {
-            if(other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            return other.Finishes(this);
-        }
-
-        /// <summary>
-        /// If there is a section of this entity that occurs at the same time as the other entity.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public abstract bool Overlaps(TemporalEntity other);
-
-        /// <summary>
-        /// If the this ends at the same time as the other entity.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public bool OverlappedBy(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            return other.Overlaps(this);
-        }
-
-        /// <summary>
-        /// If this entity is entirely contained in the other entity.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public abstract bool During(TemporalEntity other);
-
-        /// <summary>
-        /// If this entity contains the entire other entity.
-        /// </summary>
-        /// <param name="other">The entity to compare against.</param>
-        /// <returns>True if this is the case.</returns>
-        public bool Contains(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            return other.During(this);
         }
 
         /// <summary>

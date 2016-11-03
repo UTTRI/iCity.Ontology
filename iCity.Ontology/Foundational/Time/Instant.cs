@@ -36,27 +36,27 @@ namespace iCity.Ontology.Foundational.Time
             Time = time;
         }
 
-        public override bool HasBeginning
+        public override Instant HasBeginning
         {
             get
             {
-                return false;
+                return this;
             }
         }
 
-        public override bool HasDuration
+        public override TimeSpan HasDuration
         {
             get
             {
-                return false;
+                return TimeSpan.Zero;
             }
         }
 
-        public override bool HasEnding
+        public override Instant HasEnding
         {
             get
             {
-                return false;
+                return this;
             }
         }
 
@@ -79,77 +79,6 @@ namespace iCity.Ontology.Foundational.Time
             throw new InvalidOperationException($"Unable to compare a this Instant to a {other.GetType().FullName}!");
         }
 
-        public override bool During(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Equals(instant);
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Time == interval.Start && interval.Duration == TimeSpan.Zero;
-            }
-            return false;
-        }
-
-        public override bool Starts(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Equals(instant);
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Time == interval.Start;
-            }
-            return false;
-        }
-
-        public override bool Finishes(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Equals(instant);
-            }
-            var interval = other as Interval;
-            if (interval != null)
-            {
-                return Time == interval.End;
-            }
-            return false;
-        }
-
-        public override bool Overlaps(TemporalEntity other)
-        {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-            var instant = other as Instant;
-            if (instant != null)
-            {
-                return Equals(instant);
-            }
-            return false;
-        }
-
         public override bool Equals(TemporalEntity other)
         {
             if (other == null)
@@ -170,9 +99,24 @@ namespace iCity.Ontology.Foundational.Time
             var interval = other as Interval;
             if (interval != null)
             {
-                return Time == interval.Start && interval.Duration == TimeSpan.Zero;
+                return Time == interval.Start && interval.HasDuration == TimeSpan.Zero;
             }
             return false;
+        }
+
+        /// <summary>
+        /// If this entity is inside of the interval.  Does not count
+        /// if it is at the start or end of the interval.
+        /// </summary>
+        /// <param name="interval">The entity to check against.</param>
+        /// <returns>True if this is the case.</returns>
+        public bool Inside(Interval interval)
+        {
+            if(interval == null)
+            {
+                throw new ArgumentNullException(nameof(Interval));
+            }
+            return interval.Start < Time && Time < interval.End;
         }
     }
 }
