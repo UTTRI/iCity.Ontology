@@ -24,27 +24,88 @@ using System.Threading.Tasks;
 
 namespace iCity.Ontology.Foundational.Location
 {
-    public class Point : SpatialThing
+    public sealed class Point : Location
     {
-        public float Latitude { get; private set; }
-        public float Longitude { get; private set; }
-        public float Altitude { get; private set; }
-
-        public override bool HasPart(SpatialThing thing)
+        public override bool HasPart(SpatialFeature feature)
         {
+            if (feature == null)
+            {
+                throw new ArgumentNullException(nameof(feature));
+            }
             return false;
         }
 
-        public override bool PartOf(SpatialThing thing)
+        public override bool PartOf(SpatialFeature feature)
         {
+            if(feature == null)
+            {
+                throw new ArgumentNullException(nameof(feature));
+            }
+            return feature.HasPart(this);
+        }
+
+        public override bool ConnectsWith(SpatialFeature feature)
+        {
+            if (feature == null)
+            {
+                throw new ArgumentNullException(nameof(feature));
+            }
             return false;
         }
 
-        public Point(float latitude, float longitude, float altitude)
+        public override bool DisconnectedFrom(SpatialFeature feature)
         {
-            Latitude = latitude;
-            Longitude = longitude;
-            Altitude = altitude;
+            throw new NotImplementedException();
+        }
+
+        public override bool DiscreteFrom(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ExternallyConnectedWith(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Equals(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool NonTangentialPropertyPartOf(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Overlaps(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool PartiallyOverlaps(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool IsPropertyPartOf(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool TangentialPropertyPartOf(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool InconsistentWith(SpatialFeature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Point(float latitude, float longitude, float altitude) : base(latitude, longitude, altitude)
+        {
+            
         }
     }
 }

@@ -24,23 +24,18 @@ using System.Threading.Tasks;
 
 namespace iCity.Ontology.Foundational.Location
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public abstract class SpatialThing
+    public class MultiLineString : GeometryCollection
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thing"></param>
-        /// <returns></returns>
-        public abstract bool PartOf(SpatialThing thing);
+        public IReadOnlyList<LineString> LineStringMember { get; private set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="thing"></param>
-        /// <returns></returns>
-        public abstract bool HasPart(SpatialThing thing);
+        public MultiLineString(IList<LineString> lineStrings) : base(ComputeBounds(lineStrings))
+        {
+            LineStringMember = lineStrings.ToArray();
+        }
+
+        private static BoundingBox ComputeBounds(IList<LineString> lineStrings)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
