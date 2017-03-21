@@ -22,7 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
     public class MultiPoint : GeometryCollection
     {

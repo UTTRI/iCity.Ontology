@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,26 +16,18 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
+using iCity.Ontology.Foundational.Time;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.Change
 {
-    public class LineString : Geometry
+    public abstract class TemporalEntity<T, K>
     {
-        public IReadOnlyList<Point> Points { get; private set; }
-
-        public LineString(IList<Point> points) : base(ComputeBox(points))
-        {
-            Points = points.ToArray();
-        }
-
-        private static BoundingBox ComputeBox(IList<Point> points)
-        {
-            throw new NotImplementedException();
-        }
+        private List<K> Manifistations { get; } = new List<K>();
     }
 }

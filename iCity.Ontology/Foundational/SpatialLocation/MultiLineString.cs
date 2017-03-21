@@ -22,19 +22,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public abstract class Location : SpatialFeature
+    public class MultiLineString : GeometryCollection
     {
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
-        public double Altitude { get; private set; }
+        public IReadOnlyList<LineString> LineStringMember { get; private set; }
 
-        public Location(double latitude, double longitude, double altitude = 0)
+        public MultiLineString(IList<LineString> lineStrings) : base(ComputeBounds(lineStrings))
         {
-            Latitude = latitude;
-            Longitude = longitude;
-            Altitude = altitude;
+            LineStringMember = lineStrings.ToArray();
+        }
+
+        private static BoundingBox ComputeBounds(IList<LineString> lineStrings)
+        {
+            throw new NotImplementedException();
         }
     }
 }

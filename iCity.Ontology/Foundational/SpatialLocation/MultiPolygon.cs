@@ -22,7 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
     public class MultiPolygon : GeometryCollection
     {
@@ -35,7 +35,28 @@ namespace iCity.Ontology.Foundational.Location
 
         private static BoundingBox ComputeBounds(IList<Polygon> polygons)
         {
-            throw new NotImplementedException();
+            double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
+            for (int j = 0; j < polygons.Count; j++)
+            {
+                var innerBox = polygons[j].BoundingBox;
+                if (north > innerBox.NorthBound)
+                {
+                    north = innerBox.NorthBound;
+                }
+                if (south < innerBox.SouthBound)
+                {
+                    south = innerBox.SouthBound;
+                }
+                if (east > innerBox.EastBound)
+                {
+                    east = innerBox.EastBound;
+                }
+                if (west < innerBox.WestBound)
+                {
+                    west = innerBox.WestBound;
+                }
+            }
+            return new BoundingBox(north, south, east, west);
         }
     }
 }

@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +34,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,20 +47,20 @@
   <ItemGroup>
     <Compile Include="Foundational\Activity\Activty.cs" />
     <Compile Include="Foundational\Activity\Event.cs" />
-    <Compile Include="Foundational\Change\History.cs" />
+    <Compile Include="Foundational\Change\TemporalEntity.cs" />
     <Compile Include="Foundational\Change\Manifestation.cs" />
-    <Compile Include="Foundational\Location\BoundingBox.cs" />
-    <Compile Include="Foundational\Location\Geometry.cs" />
-    <Compile Include="Foundational\Location\GeometryCollection.cs" />
-    <Compile Include="Foundational\Location\LinearRing.cs" />
-    <Compile Include="Foundational\Location\LineString.cs" />
-    <Compile Include="Foundational\Location\Location.cs" />
-    <Compile Include="Foundational\Location\MultiLineString.cs" />
-    <Compile Include="Foundational\Location\MultiPoint.cs" />
-    <Compile Include="Foundational\Location\MultiPolygon.cs" />
-    <Compile Include="Foundational\Location\Point.cs" />
-    <Compile Include="Foundational\Location\Polygon.cs" />
-    <Compile Include="Foundational\Location\SpatialFeature.cs" />
+    <Compile Include="Foundational\SpatialLocation\BoundingBox.cs" />
+    <Compile Include="Foundational\SpatialLocation\Geometry.cs" />
+    <Compile Include="Foundational\SpatialLocation\GeometryCollection.cs" />
+    <Compile Include="Foundational\SpatialLocation\LinearRing.cs" />
+    <Compile Include="Foundational\SpatialLocation\LineString.cs" />
+    <Compile Include="Foundational\SpatialLocation\Location.cs" />
+    <Compile Include="Foundational\SpatialLocation\MultiLineString.cs" />
+    <Compile Include="Foundational\SpatialLocation\MultiPoint.cs" />
+    <Compile Include="Foundational\SpatialLocation\MultiPolygon.cs" />
+    <Compile Include="Foundational\SpatialLocation\Point.cs" />
+    <Compile Include="Foundational\SpatialLocation\Polygon.cs" />
+    <Compile Include="Foundational\SpatialLocation\SpatialFeature.cs" />
     <Compile Include="Foundational\Time\Instant.cs" />
     <Compile Include="Foundational\Time\Interval.cs" />
     <Compile Include="Foundational\Time\TemporalEntity.cs" />
@@ -72,6 +77,9 @@
     <Folder Include="UrbanSystem\Transit\" />
     <Folder Include="UrbanSystem\TransportationNetwork\" />
     <Folder Include="UrbanSystem\Vehicle\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

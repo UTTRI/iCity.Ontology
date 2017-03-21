@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -26,19 +26,22 @@ using System.Threading.Tasks;
 
 namespace iCity.Ontology.UrbanSystem.Person
 {
-    public class Person : History<Person>
+    public class Person : Manifestation<Person, PersonPD>
     {
-        public class PersonAtTime : Manifestation<Person>
+
+        public Person(Interval at) : this(new PersonPD(), at)
         {
-            public PersonAtTime(History<Person> history, Interval time) : base(history,time)
-            {
 
-            }
-
-            protected override Manifestation<Person> DeepClone()
-            {
-                throw new NotImplementedException();
-            }
         }
+
+        public Person(PersonPD person, Interval at) : base(person, at)
+        {
+
+        }
+    }
+
+    public class PersonPD : TemporalEntity<Person, PersonPD>
+    {
+        
     }
 }

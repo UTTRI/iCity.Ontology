@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -22,12 +22,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public abstract class GeometryCollection : Geometry
+    public class Geometry
     {
-        public GeometryCollection(BoundingBox bounds) : base(bounds)
+        public BoundingBox BoundingBox { get; private set; }
+
+        public Geometry(BoundingBox bounds)
         {
+            BoundingBox = bounds;
         }
     }
 }

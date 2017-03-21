@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -25,22 +25,16 @@ using System.Threading.Tasks;
 
 namespace iCity.Ontology.Foundational.Change
 {
-    public abstract class Manifestation<T>
+    public abstract class Manifestation<T, K> 
     {
         public Interval TemporalExtent { get; private set; }
 
-        public History<T> PartOf { get; private set; }
+        public K PartOf { get; private set; }
 
-        protected Manifestation(History<T> partOf, Interval temporalExtent)
+        protected Manifestation(K partOf, Interval temporalExtent)
         {
             PartOf = partOf;
             TemporalExtent = temporalExtent;
         }
-
-        /// <summary>
-        /// Create a clone of the type replicating the current state in order to continue
-        /// </summary>
-        /// <returns>A new manifestation</returns>
-        protected abstract Manifestation<T> DeepClone();
     }
 }

@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -66,13 +66,11 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            var instant = other as Instant;
-            if (instant != null)
+            if (other is Instant instant)
             {
                 return Time < instant.Time;
             }
-            var interval = other as Interval;
-            if (interval != null)
+            if (other is Interval interval)
             {
                 return Time < interval.Start;
             }
@@ -91,13 +89,11 @@ namespace iCity.Ontology.Foundational.Time
                 return true;
             }
             // Nothing can be during an instant
-            var instant = other as Instant;
-            if(instant != null)
+            if (other is Instant instant)
             {
                 return Time == instant.Time;
             }
-            var interval = other as Interval;
-            if (interval != null)
+            if (other is Interval interval)
             {
                 return Time == interval.Start && interval.HasDuration == TimeSpan.Zero;
             }
@@ -114,7 +110,7 @@ namespace iCity.Ontology.Foundational.Time
         {
             if(interval == null)
             {
-                throw new ArgumentNullException(nameof(Interval));
+                throw new ArgumentNullException(nameof(interval));
             }
             return interval.Start < Time && Time < interval.End;
         }
@@ -127,7 +123,25 @@ namespace iCity.Ontology.Foundational.Time
         /// <returns>A new instant with the given shift</returns>
         public static Instant operator+(Instant us, TimeSpan delta)
         {
+            if (us == null)
+            {
+                throw new ArgumentNullException(nameof(us));
+            }
+            if (delta == null)
+            {
+                throw new ArgumentNullException(nameof(delta));
+            }
             return new Instant(us.Time + delta);
+        }
+
+        /// <summary>
+        /// Creates a new instant with the given delta
+        /// </summary>
+        /// <param name="delta">The delta to apply to the instant.</param>
+        /// <returns>A new instant with the given shift</returns>
+        public Instant Add(TimeSpan delta)
+        {
+            return this + delta;
         }
 
         /// <summary>
@@ -138,7 +152,25 @@ namespace iCity.Ontology.Foundational.Time
         /// <returns>A new instant with the opposite of the given shift</returns>
         public static Instant operator -(Instant us, TimeSpan delta)
         {
+            if(us == null)
+            {
+                throw new ArgumentNullException(nameof(us));
+            }
+            if(delta == null)
+            {
+                throw new ArgumentNullException(nameof(delta));
+            }
             return new Instant(us.Time - delta);
+        }
+
+        /// <summary>
+        /// Creates a new instant with the opposite of the given delta
+        /// </summary>
+        /// <param name="delta">The delta to apply to the instant.</param>
+        /// <returns>A new instant with the opposite of the given shift</returns>
+        public Instant Subtract(TimeSpan delta)
+        {
+            return this - delta;
         }
     }
 }

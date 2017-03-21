@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -22,20 +22,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public class MultiLineString : GeometryCollection
+    public class LinearRing : LineString
     {
-        public IReadOnlyList<LineString> LineStringMember { get; private set; }
-
-        public MultiLineString(IList<LineString> lineStrings) : base(ComputeBounds(lineStrings))
+        public LinearRing(IList<Point> points) : base(points)
         {
-            LineStringMember = lineStrings.ToArray();
-        }
-
-        private static BoundingBox ComputeBounds(IList<LineString> lineStrings)
-        {
-            throw new NotImplementedException();
         }
     }
 }

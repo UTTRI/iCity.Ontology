@@ -17,20 +17,18 @@
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public class Geometry
+    public abstract class GeometryCollection : Geometry
     {
-        public BoundingBox BoundingBox { get; private set; }
-
-        public Geometry(BoundingBox bounds)
+        protected GeometryCollection(BoundingBox bounds) : base(bounds)
         {
-            BoundingBox = bounds;
         }
     }
 }

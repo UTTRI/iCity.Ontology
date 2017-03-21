@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -22,21 +22,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public struct BoundingBox
+    public abstract class Location : SpatialFeature
     {
-        public double EastBound { get; private set; }
-        public double WestBound { get; private set; }
-        public double NorthBound { get; private set; }
-        public double SoundBound { get; private set; }
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
+        public double Altitude { get; private set; }
 
-        public BoundingBox(double north, double south, double east, double west)
+        protected Location(double latitude, double longitude, double altitude = 0)
         {
-            NorthBound = north;
-            EastBound = east;
-            WestBound = west;
-            SoundBound = south;
+            Latitude = latitude;
+            Longitude = longitude;
+            Altitude = altitude;
         }
     }
 }

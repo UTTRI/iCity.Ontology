@@ -22,11 +22,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
     /// <summary>
     /// 
     /// </summary>
+    /// <seealso cref="http://geovocab.org/spatial.html"/>
     public abstract class SpatialFeature
     {
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -17,7 +17,6 @@
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using iCity.Ontology.Foundational.Time;
 using System;
 using System.Collections.Generic;
 using System.Linq;

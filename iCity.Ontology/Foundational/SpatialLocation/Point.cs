@@ -22,8 +22,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class Point : Location
     {
         public override bool HasPart(SpatialFeature feature)
@@ -73,6 +76,18 @@ namespace iCity.Ontology.Foundational.Location
             throw new NotImplementedException();
         }
 
+        public bool Equals(Location location)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            return this == location ||
+                (  Latitude == location.Latitude 
+                && Longitude == location.Longitude
+                && Altitude == location.Altitude);
+        }
+
         public override bool NonTangentialPropertyPartOf(SpatialFeature feature)
         {
             throw new NotImplementedException();
@@ -103,7 +118,8 @@ namespace iCity.Ontology.Foundational.Location
             throw new NotImplementedException();
         }
 
-        public Point(float latitude, float longitude, float altitude) : base(latitude, longitude, altitude)
+        public Point(float latitude, float longitude, float altitude) 
+            : base(latitude, longitude, altitude)
         {
             
         }

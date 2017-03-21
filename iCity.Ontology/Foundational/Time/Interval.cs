@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -78,13 +78,11 @@ namespace iCity.Ontology.Foundational.Time
             {
                 throw new ArgumentNullException(nameof(other));
             }
-            var instant = other as Instant;
-            if (instant != null)
+            if (other is Instant instant)
             {
                 return End <= instant.Time;
             }
-            var interval = other as Interval;
-            if (interval != null)
+            if (other is Interval interval)
             {
                 return Before(interval);
             }
@@ -147,6 +145,20 @@ namespace iCity.Ontology.Foundational.Time
             return other.During(this);
         }
 
+        /// <summary>
+        /// Check to see if an instant is contained within this time interval.
+        /// </summary>
+        /// <param name="instant">The instant to compare against</param>
+        /// <returns>True if it is contained, false otherwise.</returns>
+        public bool Contains(Instant instant)
+        {
+            if(instant == null)
+            {
+                throw new ArgumentNullException(nameof(instant));
+            }
+            return instant.Inside(this);
+        }
+
         public override bool Equals(TemporalEntity other)
         {
             if (other == null)
@@ -158,13 +170,11 @@ namespace iCity.Ontology.Foundational.Time
             { 
                 return true;
             }
-            var instant = other as Instant;
-            if (instant != null)
+            if (other is Instant instant)
             {
                 return Duration == TimeSpan.Zero && Start == instant.Time;
             }
-            var interval = other as Interval;
-            if (interval != null)
+            if (other is Interval interval)
             {
                 return Equals(interval);
             }
@@ -293,7 +303,10 @@ namespace iCity.Ontology.Foundational.Time
         /// <returns>True if this is the case.</returns>
         public bool Meets(Interval other)
         {
-
+            if(other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
             return (Start == other.End || End == other.Start);
         }
 

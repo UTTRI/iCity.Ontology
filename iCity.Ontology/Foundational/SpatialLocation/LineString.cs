@@ -22,15 +22,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Location
+namespace iCity.Ontology.Foundational.SpatialLocation
 {
-    public class Polygon : Geometry
+    public class LineString : Geometry
     {
-        public Polygon(IList<Point> points) : base(ComputeBounds(points))
+        public IReadOnlyList<Point> Points { get; private set; }
+
+        public LineString(IList<Point> points) : base(ComputeBox(points))
         {
+            Points = points.ToArray();
         }
 
-        private static BoundingBox ComputeBounds(IList<Point> points)
+        private static BoundingBox ComputeBox(IList<Point> points)
         {
             throw new NotImplementedException();
         }
