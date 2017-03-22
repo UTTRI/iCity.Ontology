@@ -35,6 +35,8 @@ namespace iCity.Ontology.Foundational.UnitsOfMeasure.Speed
 
         public override TimeUnit TimeUnit => HourUnit.Reference;
 
+        public static readonly KilometrePerHour Reference = new KilometrePerHour();
+
         private KilometrePerHour()
         {
 

@@ -42,7 +42,7 @@ namespace iCity.Ontology.Foundational.UnitsOfMeasure.Speed
             }
             if(original.Unit is SpeedUnit originalUnit)
             {
-                return new Measure(original.Amount * (LengthUnit.ScaleRatio(toType.DistanceUnit, originalUnit.DistanceUnit) / TimeUnit.ScaleRatio(toType.TimeUnit, originalUnit.TimeUnit)), toType);
+                return new Measure(original.Amount * (LengthUnit.ScaleRatio(originalUnit.DistanceUnit, toType.DistanceUnit) / TimeUnit.ScaleRatio(originalUnit.TimeUnit, toType.TimeUnit)), toType);
             }
             throw new NotSupportedException($"You can not convert a ${original.Unit.GetType().FullName} as a Speed!");
         }

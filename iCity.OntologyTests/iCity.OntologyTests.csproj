@@ -58,6 +58,9 @@
     <Compile Include="Foundational\Location\PointTests.cs" />
     <Compile Include="Foundational\Time\InstantTests.cs" />
     <Compile Include="Foundational\Time\IntervalTests.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Length\TestLengthUnits.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Speed\TestSpeedUnits.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Time\TestTimeUnits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +72,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
