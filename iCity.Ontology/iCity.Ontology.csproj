@@ -49,6 +49,15 @@
     <Compile Include="Foundational\Activity\Event.cs" />
     <Compile Include="Foundational\Change\TemporalEntity.cs" />
     <Compile Include="Foundational\Change\Manifestation.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Time\HourUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Speed\KilometrePerHour.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Length\KiloMetreUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Length\LengthUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Mass\MassUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Measure.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Speed\MetresPerSecondUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Length\MetreUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Time\MinuteUnit.cs" />
     <Compile Include="Foundational\SpatialLocation\BoundingBox.cs" />
     <Compile Include="Foundational\SpatialLocation\Geometry.cs" />
     <Compile Include="Foundational\SpatialLocation\GeometryCollection.cs" />
@@ -64,6 +73,10 @@
     <Compile Include="Foundational\Time\Instant.cs" />
     <Compile Include="Foundational\Time\Interval.cs" />
     <Compile Include="Foundational\Time\TemporalEntity.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Time\SecondUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Speed\SpeedUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\Time\TimeUnit.cs" />
+    <Compile Include="Foundational\UnitsOfMeasure\UnitOfMeasure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrbanSystem\Person\Person.cs" />
   </ItemGroup>

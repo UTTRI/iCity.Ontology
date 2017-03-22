@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 namespace iCity.Ontology.Foundational.SpatialLocation
 {
     /// <summary>
-    /// 
+    /// A Point in space given by Latitude, Longitude and Altitude
     /// </summary>
     public sealed class Point : Location
     {
@@ -40,7 +40,7 @@ namespace iCity.Ontology.Foundational.SpatialLocation
 
         public override bool PartOf(SpatialFeature feature)
         {
-            if(feature == null)
+            if (feature == null)
             {
                 throw new ArgumentNullException(nameof(feature));
             }
@@ -73,7 +73,18 @@ namespace iCity.Ontology.Foundational.SpatialLocation
 
         public override bool Equals(SpatialFeature feature)
         {
-            throw new NotImplementedException();
+            if (feature is Point other)
+            {
+                return Equals(other);
+            }
+            return false;
+        }
+
+        public bool Equals(Point other)
+        {
+            return other.Latitude == Latitude &&
+                other.Longitude == Longitude &&
+                other.Altitude == Altitude;
         }
 
         public bool Equals(Location location)
@@ -83,7 +94,7 @@ namespace iCity.Ontology.Foundational.SpatialLocation
                 throw new ArgumentNullException(nameof(location));
             }
             return this == location ||
-                (  Latitude == location.Latitude 
+                (Latitude == location.Latitude
                 && Longitude == location.Longitude
                 && Altitude == location.Altitude);
         }
@@ -105,7 +116,11 @@ namespace iCity.Ontology.Foundational.SpatialLocation
 
         public override bool IsPropertyPartOf(SpatialFeature feature)
         {
-            throw new NotImplementedException();
+            if (feature == null)
+            {
+                return false;
+            }
+            return feature.HasPart(this);
         }
 
         public override bool TangentialPropertyPartOf(SpatialFeature feature)
@@ -118,10 +133,10 @@ namespace iCity.Ontology.Foundational.SpatialLocation
             throw new NotImplementedException();
         }
 
-        public Point(float latitude, float longitude, float altitude) 
+        public Point(float latitude, float longitude, float altitude)
             : base(latitude, longitude, altitude)
         {
-            
+
         }
     }
 }
