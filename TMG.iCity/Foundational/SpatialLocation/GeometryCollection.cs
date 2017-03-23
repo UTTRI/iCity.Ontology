@@ -16,35 +16,19 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.SpatialLocation
 {
-    [TestClass()]
-    public class PointTests
+    public abstract class GeometryCollection : Geometry
     {
-        [TestMethod()]
-        public void HasPartTest()
+        protected GeometryCollection(BoundingBox bounds) : base(bounds)
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void PointTest()
-        {
-            Assert.Fail();
         }
     }
 }

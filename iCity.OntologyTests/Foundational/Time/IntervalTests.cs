@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.Ontology.Foundational.Time.Tests
+namespace TMG.iCity.Foundational.Time.Tests
 {
     [TestClass()]
     public class IntervalTests

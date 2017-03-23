@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,35 +16,18 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.SpatialLocation
 {
-    [TestClass()]
-    public class PointTests
+    public class LinearRing : LineString
     {
-        [TestMethod()]
-        public void HasPartTest()
+        public LinearRing(IList<Point> points) : base(points)
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void PointTest()
-        {
-            Assert.Fail();
         }
     }
 }

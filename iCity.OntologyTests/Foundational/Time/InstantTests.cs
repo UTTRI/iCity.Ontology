@@ -17,15 +17,15 @@
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using iCity.Ontology.Foundational.Time;
+using TMG.iCity.Foundational.Time;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using iCity.OntologyTests;
+using TMG.OntologyTests;
 
-namespace iCity.Ontology.Foundational.Time.Tests
+namespace TMG.iCity.Foundational.Time.Tests
 {
     [TestClass()]
     public class InstantTests

@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,35 +16,26 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.UnitsOfMeasure.Length
 {
-    [TestClass()]
-    public class PointTests
+    /// <summary>
+    /// Represents the unit of a kilometer of distance
+    /// </summary>
+    public sealed class KiloMetreUnit : LengthUnit
     {
-        [TestMethod()]
-        public void HasPartTest()
-        {
-            Assert.Fail();
-        }
+        public static readonly KiloMetreUnit Reference = new KiloMetreUnit();
 
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
+        protected override double ScaleToMetre => 1000.0;
 
-        [TestMethod()]
-        public void PointTest()
+        private KiloMetreUnit()
         {
-            Assert.Fail();
+
         }
     }
 }

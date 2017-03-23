@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,35 +16,26 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.UnitsOfMeasure.Time
 {
-    [TestClass()]
-    public class PointTests
+    /// <summary>
+    /// Represents a unit for a minute of time
+    /// </summary>
+    public sealed class MinuteUnit : TimeUnit
     {
-        [TestMethod()]
-        public void HasPartTest()
-        {
-            Assert.Fail();
-        }
+        public static readonly MinuteUnit Reference = new MinuteUnit();
 
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
+        protected override double ScaleToMinute => 1.0f;
 
-        [TestMethod()]
-        public void PointTest()
+        private MinuteUnit()
         {
-            Assert.Fail();
+
         }
     }
 }

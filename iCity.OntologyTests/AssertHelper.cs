@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iCity.OntologyTests
+namespace TMG.OntologyTests
 {
     static class AssertHelper
     {

@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,35 +16,32 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.Time;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.UrbanSystem.Person
 {
-    [TestClass()]
-    public class PointTests
+    public class Person : Manifestation<Person, PersonPD>
     {
-        [TestMethod()]
-        public void HasPartTest()
+
+        public Person(Interval at) : this(new PersonPD(), at)
         {
-            Assert.Fail();
+
         }
 
-        [TestMethod()]
-        public void PartOfTest()
+        public Person(PersonPD person, Interval at) : base(person, at)
         {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void PointTest()
-        {
-            Assert.Fail();
         }
+    }
+
+    public class PersonPD : TemporalEntity<Person, PersonPD>
+    {
+        
     }
 }

@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,35 +16,30 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
+using TMG.iCity.Foundational.UnitsOfMeasure.Time;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.UnitsOfMeasure.Speed
 {
-    [TestClass()]
-    public class PointTests
+    /// <summary>
+    /// This unit represents the speed of kilometres per hour
+    /// </summary>
+    public class KilometrePerHour : SpeedUnit
     {
-        [TestMethod()]
-        public void HasPartTest()
-        {
-            Assert.Fail();
-        }
+        public override LengthUnit DistanceUnit => KiloMetreUnit.Reference;
 
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
+        public override TimeUnit TimeUnit => HourUnit.Reference;
 
-        [TestMethod()]
-        public void PointTest()
+        public static readonly KilometrePerHour Reference = new KilometrePerHour();
+
+        private KilometrePerHour()
         {
-            Assert.Fail();
+
         }
     }
 }

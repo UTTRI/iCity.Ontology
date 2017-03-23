@@ -18,10 +18,10 @@
 */
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using iCity.Ontology.Foundational.UnitsOfMeasure;
-using iCity.Ontology.Foundational.UnitsOfMeasure.Length;
+using TMG.iCity.Foundational.UnitsOfMeasure;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
 
-namespace iCity.OntologyTests.Foundational.UnitsOfMeasure.Length
+namespace TMG.OntologyTests.Foundational.UnitsOfMeasure.Length
 {
     [TestClass]
     public class TestLengthUnits

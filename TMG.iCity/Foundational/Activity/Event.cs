@@ -16,35 +16,32 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
+using TMG.iCity.Foundational.Time;
+using TMG.iCity.UrbanSystem.Person;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.iCity.Foundational.Activity
 {
-    [TestClass()]
-    public class PointTests
+    /// <summary>
+    /// An instance of a particular activity
+    /// </summary>
+    public class Event
     {
-        [TestMethod()]
-        public void HasPartTest()
-        {
-            Assert.Fail();
-        }
+        public Activty OccurrenceOf { get; protected set; }
 
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
+        public Instant BeginsAt { get; protected set; }
 
-        [TestMethod()]
-        public void PointTest()
+        public Instant EndsAt { get; protected set; }
+
+        public bool HasDuration { get { return !BeginsAt.Equals(EndsAt); } }
+
+        public bool HasParticipent(Person person)
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
     }
 }
