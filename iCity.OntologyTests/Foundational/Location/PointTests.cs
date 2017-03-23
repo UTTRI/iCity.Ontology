@@ -17,14 +17,14 @@
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.SpatialLocation;
+using TMG.Ontology.Foundational.SpatialLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.SpatialLocation.Tests
+namespace TMG.Ontology.Foundational.SpatialLocation.Tests
 {
     [TestClass()]
     public class PointTests

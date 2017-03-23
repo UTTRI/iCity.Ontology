@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMG.OntologyTests;
 
-namespace TMG.iCity.Foundational.Time.Tests
+namespace TMG.Ontology.Foundational.Time.Tests
 {
     [TestClass()]
     public class InstantTests

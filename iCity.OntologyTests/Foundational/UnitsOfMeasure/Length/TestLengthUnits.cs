@@ -18,8 +18,8 @@
 */
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.iCity.Foundational.UnitsOfMeasure;
-using TMG.iCity.Foundational.UnitsOfMeasure.Length;
+using TMG.Ontology.Foundational.UnitsOfMeasure;
+using TMG.Ontology.Foundational.UnitsOfMeasure.Length;
 
 namespace TMG.OntologyTests.Foundational.UnitsOfMeasure.Length
 {
