@@ -25,12 +25,12 @@ using System.Threading.Tasks;
 namespace TMG.iCity.Foundational.Activity
 {
     /// <summary>
-    /// A classfication that an event can be of.
+    /// A classification that an event can be of.
     /// </summary>
-    public abstract class Activty
+    public abstract class Activity
     {
-        public abstract bool HasOccurrence(Event ev);
+        public abstract bool HasOccurrence(ActivityOccurrence occurrence);    
 
-        public abstract bool HasSubactivity(Activty act);
+        public abstract bool HasSubactivity(Activity act);
     }
 }

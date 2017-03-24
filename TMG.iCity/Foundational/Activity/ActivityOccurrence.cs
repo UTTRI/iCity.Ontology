@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -16,32 +16,14 @@
     You should have received a copy of the GNU General Public License
     along with iCity Ontology.  If not, see <http://www.gnu.org/licenses/>.
 */
-using TMG.iCity.Foundational.Time;
-using TMG.iCity.UrbanSystem.Person;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TMG.iCity.Foundational.Activity
 {
-    /// <summary>
-    /// An instance of a particular activity
-    /// </summary>
-    public class Event
+    public abstract class ActivityOccurrence
     {
-        public Activty OccurrenceOf { get; protected set; }
 
-        public Instant BeginsAt { get; protected set; }
-
-        public Instant EndsAt { get; protected set; }
-
-        public bool HasDuration { get { return !BeginsAt.Equals(EndsAt); } }
-
-        public bool HasParticipent(Person person)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
