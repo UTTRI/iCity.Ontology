@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
@@ -35,7 +36,36 @@ namespace TMG.iCity.Foundational.SpatialLocation
 
         private static BoundingBox ComputeBox(IList<Point> points)
         {
-            throw new NotImplementedException();
+            if (points.Count == 0)
+            {
+                return new BoundingBox(0.0, 0.0, 0.0, 0.0, MetreUnit.Reference);
+            }
+            else
+            {
+                double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
+                var units = points[0].Latitude.Unit;
+                for (int i = 0; i < points.Count; i++)
+                {
+                    var point = points[i];
+                    if (north < point.Latitude.Amount)
+                    {
+                        north = point.Latitude.Amount;
+                    }
+                    if (south > point.Latitude.Amount)
+                    {
+                        south = point.Latitude.Amount;
+                    }
+                    if (east < point.Longitude.Amount)
+                    {
+                        east = point.Longitude.Amount;
+                    }
+                    if (west > point.Longitude.Amount)
+                    {
+                        west = point.Longitude.Amount;
+                    }
+                }
+                return new BoundingBox(north, south, east, west, units);
+            }
         }
     }
 }

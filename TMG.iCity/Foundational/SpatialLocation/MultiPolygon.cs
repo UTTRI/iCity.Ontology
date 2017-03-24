@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
@@ -36,27 +37,30 @@ namespace TMG.iCity.Foundational.SpatialLocation
         private static BoundingBox ComputeBounds(IList<Polygon> polygons)
         {
             double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
+            var unit = polygons.Count > 0 ? 
+                  polygons[0].BoundingBox.NorthBound.Unit
+                : MetreUnit.Reference;
             for (int j = 0; j < polygons.Count; j++)
             {
                 var innerBox = polygons[j].BoundingBox;
-                if (north > innerBox.NorthBound)
+                if (north > innerBox.NorthBound.Amount)
                 {
-                    north = innerBox.NorthBound;
+                    north = innerBox.NorthBound.Amount;
                 }
-                if (south < innerBox.SouthBound)
+                if (south < innerBox.SouthBound.Amount)
                 {
-                    south = innerBox.SouthBound;
+                    south = innerBox.SouthBound.Amount;
                 }
-                if (east > innerBox.EastBound)
+                if (east > innerBox.EastBound.Amount)
                 {
-                    east = innerBox.EastBound;
+                    east = innerBox.EastBound.Amount;
                 }
-                if (west < innerBox.WestBound)
+                if (west < innerBox.WestBound.Amount)
                 {
-                    west = innerBox.WestBound;
+                    west = innerBox.WestBound.Amount;
                 }
             }
-            return new BoundingBox(north, south, east, west);
+            return new BoundingBox(north, south, east, west, unit);
         }
     }
 }

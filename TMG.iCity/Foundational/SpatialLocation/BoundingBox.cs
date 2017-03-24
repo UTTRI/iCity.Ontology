@@ -21,22 +21,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
     public struct BoundingBox
     {
-        public double EastBound { get; private set; }
-        public double WestBound { get; private set; }
-        public double NorthBound { get; private set; }
-        public double SouthBound { get; private set; }
+        public Measure EastBound { get; private set; }
+        public Measure WestBound { get; private set; }
+        public Measure NorthBound { get; private set; }
+        public Measure SouthBound { get; private set; }
 
-        public BoundingBox(double north, double south, double east, double west)
+        public BoundingBox(double north, double south, double east, double west, UnitOfMeasure unit)
         {
-            NorthBound = north;
-            EastBound = east;
-            WestBound = west;
-            SouthBound = south;
+            NorthBound = new Measure(north, unit);
+            EastBound = new Measure(east, unit);
+            WestBound = new Measure(west, unit);
+            SouthBound = new Measure(south, unit);
         }
 
         public override bool Equals(object obj)

@@ -29,22 +29,6 @@ namespace TMG.Ontology.Foundational.SpatialLocation.Tests
     [TestClass()]
     public class PointTests
     {
-        [TestMethod()]
-        public void HasPartTest()
-        {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void PartOfTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void PointTest()
-        {
-            Assert.Fail();
-        }
     }
 }

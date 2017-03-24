@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -21,122 +21,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
     /// <summary>
     /// A Point in space given by Latitude, Longitude and Altitude
     /// </summary>
-    public sealed class Point : Location
+    public struct Point
     {
-        public override bool HasPart(SpatialFeature feature)
+        public Measure Latitude { get; private set; }
+        public Measure Longitude { get; private set; }
+        public Measure Altitude { get; private set; }
+
+        public Point(Measure latitude, Measure longitude)
+            :this(latitude, longitude, new Measure(0.0, latitude.Unit))
         {
-            if (feature == null)
-            {
-                throw new ArgumentNullException(nameof(feature));
-            }
-            return false;
+
         }
 
-        public override bool PartOf(SpatialFeature feature)
+        public Point(Measure latitude, Measure longitude, Measure altitude)
         {
-            if (feature == null)
-            {
-                throw new ArgumentNullException(nameof(feature));
-            }
-            return feature.HasPart(this);
+            Latitude = latitude;
+            Longitude = longitude;
+            Altitude = altitude;
         }
 
-        public override bool ConnectsWith(SpatialFeature feature)
+        public bool Equals(Point otherPoint)
         {
-            if (feature == null)
-            {
-                throw new ArgumentNullException(nameof(feature));
-            }
-            return false;
+            return (Latitude == otherPoint.Latitude
+                && Longitude == otherPoint.Longitude
+                && Altitude == otherPoint.Altitude);
         }
 
-        public override bool DisconnectedFrom(SpatialFeature feature)
+        public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool DiscreteFrom(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ExternallyConnectedWith(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Equals(SpatialFeature feature)
-        {
-            if (feature is Point other)
+            if(obj is Point other)
             {
                 return Equals(other);
             }
             return false;
         }
 
-        public bool Equals(Point other)
+        public static bool operator==(Point first, Point second)
         {
-            return other.Latitude == Latitude &&
-                other.Longitude == Longitude &&
-                other.Altitude == Altitude;
+            return first.Equals(second);
         }
 
-        public bool Equals(Location location)
+        public static bool operator!=(Point first, Point second)
         {
-            if (location == null)
+            return !first.Equals(second);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
             {
-                throw new ArgumentNullException(nameof(location));
+                return Latitude.GetHashCode() + Longitude.GetHashCode() + Altitude.GetHashCode();
             }
-            return this == location ||
-                (Latitude == location.Latitude
-                && Longitude == location.Longitude
-                && Altitude == location.Altitude);
-        }
-
-        public override bool NonTangentialPropertyPartOf(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Overlaps(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool PartiallyOverlaps(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool IsPropertyPartOf(SpatialFeature feature)
-        {
-            if (feature == null)
-            {
-                return false;
-            }
-            return feature.HasPart(this);
-        }
-
-        public override bool TangentialPropertyPartOf(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool InconsistentWith(SpatialFeature feature)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Point(float latitude, float longitude, float altitude)
-            : base(latitude, longitude, altitude)
-        {
-
         }
     }
 }

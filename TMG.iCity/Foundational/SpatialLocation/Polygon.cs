@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
@@ -32,53 +34,36 @@ namespace TMG.iCity.Foundational.SpatialLocation
 
         private static BoundingBox ComputeBounds(IList<Point> points)
         {
-            double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
-            // optimize the case for List
-            if (points is List<Point> pointList)
+            if(points.Count == 0)
             {
-                for (int i = 0; i < pointList.Count; i++)
-                {
-                    if (north > pointList[i].Latitude)
-                    {
-                        north = pointList[i].Latitude;
-                    }
-                    if (south < pointList[i].Latitude)
-                    {
-                        south = pointList[i].Latitude;
-                    }
-                    if (east > pointList[i].Longitude)
-                    {
-                        east = pointList[i].Longitude;
-                    }
-                    if (west < pointList[i].Longitude)
-                    {
-                        west = pointList[i].Longitude;
-                    }
-                }
+                return new BoundingBox(0.0, 0.0, 0.0, 0.0, MetreUnit.Reference);
             }
             else
             {
+                double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
+                var units = points[0].Latitude.Unit;
                 for (int i = 0; i < points.Count; i++)
                 {
-                    if(north > points[i].Latitude)
+                    var point = points[i];
+                    if(north < point.Latitude.Amount)
                     {
-                        north = points[i].Latitude;
+                        north = point.Latitude.Amount;
                     }
-                    if (south < points[i].Latitude)
+                    if(south > point.Latitude.Amount)
                     {
-                        south = points[i].Latitude;
+                        south = point.Latitude.Amount;
                     }
-                    if (east > points[i].Longitude)
+                    if (east < point.Longitude.Amount)
                     {
-                        east = points[i].Longitude;
+                        east = point.Longitude.Amount;
                     }
-                    if (west < points[i].Longitude)
+                    if (west > point.Longitude.Amount)
                     {
-                        west = points[i].Longitude;
+                        west = point.Longitude.Amount;
                     }
                 }
+                return new BoundingBox(north, south, east, west, units);
             }
-            return new BoundingBox(north, south, east, west);
         }
     }
 }

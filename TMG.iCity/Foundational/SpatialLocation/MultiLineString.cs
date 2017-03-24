@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2016 University of Toronto
+    Copyright 2016-2017 University of Toronto
 
     This file is part of iCity Ontology.
 
@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure.Length;
 
 namespace TMG.iCity.Foundational.SpatialLocation
 {
@@ -35,7 +36,31 @@ namespace TMG.iCity.Foundational.SpatialLocation
 
         private static BoundingBox ComputeBounds(IList<LineString> lineStrings)
         {
-            throw new NotImplementedException();
+            double north = double.NegativeInfinity, south = double.PositiveInfinity, east = double.NegativeInfinity, west = double.PositiveInfinity;
+            var unit = lineStrings.Count > 0 ?
+                  lineStrings[0].BoundingBox.NorthBound.Unit
+                : MetreUnit.Reference;
+            for (int j = 0; j < lineStrings.Count; j++)
+            {
+                var innerBox = lineStrings[j].BoundingBox;
+                if (north > innerBox.NorthBound.Amount)
+                {
+                    north = innerBox.NorthBound.Amount;
+                }
+                if (south < innerBox.SouthBound.Amount)
+                {
+                    south = innerBox.SouthBound.Amount;
+                }
+                if (east > innerBox.EastBound.Amount)
+                {
+                    east = innerBox.EastBound.Amount;
+                }
+                if (west < innerBox.WestBound.Amount)
+                {
+                    west = innerBox.WestBound.Amount;
+                }
+            }
+            return new BoundingBox(north, south, east, west, unit);
         }
     }
 }
