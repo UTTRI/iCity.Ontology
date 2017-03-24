@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace TMG.iCity.Foundational.Change
 {
-    public abstract class Manifestation<T, K> 
+    public abstract class Manifestation<K>
     {
         public Interval TemporalExtent { get; private set; }
 
@@ -35,6 +35,27 @@ namespace TMG.iCity.Foundational.Change
         {
             PartOf = partOf;
             TemporalExtent = temporalExtent;
+        }
+
+        public bool DisjointWith(TemporalEntity entity)
+        {
+            switch(entity)
+            {
+                case Instant instant:
+                    return !TemporalExtent.Contains(instant);
+                case Interval interval:
+                    return TemporalExtent.Contains(interval);
+            }
+            return false;
+        }
+
+        public bool ManifestinationOf(TimeVaryingConcept<K, Manifestation<K>> entity)
+        {
+            if(entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            return entity.HasManifestation(this);
         }
     }
 }

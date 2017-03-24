@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
 namespace TMG.iCity.UrbanSystem.Person
 {
-    public class Person : Manifestation<Person, PersonPD>
+    public class Person : Manifestation<PersonPD>
     {
 
         public Person(Interval at) : this(new PersonPD(), at)
@@ -40,7 +40,7 @@ namespace TMG.iCity.UrbanSystem.Person
         }
     }
 
-    public class PersonPD : TemporalEntity<Person, PersonPD>
+    public class PersonPD : TimeVaryingConcept<PersonPD, Person>
     {
         
     }
