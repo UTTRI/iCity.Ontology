@@ -18,10 +18,8 @@
 */
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.Ontology.Foundational.UnitsOfMeasure;
-using TMG.Ontology.Foundational.UnitsOfMeasure.Speed;
 
-namespace TMG.OntologyTests.Foundational.UnitsOfMeasure.Speed
+namespace TMG.iCity.Foundational.UnitsOfMeasure.Speed
 {
     [TestClass]
     public class TestSpeedUnits

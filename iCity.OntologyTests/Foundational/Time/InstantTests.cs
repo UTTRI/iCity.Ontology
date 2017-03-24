@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMG.OntologyTests;
+using TMG.iCity;
 
 namespace TMG.Ontology.Foundational.Time.Tests
 {

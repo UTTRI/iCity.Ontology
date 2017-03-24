@@ -18,10 +18,8 @@
 */
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TMG.Ontology.Foundational.UnitsOfMeasure;
-using TMG.Ontology.Foundational.UnitsOfMeasure.Time;
 
-namespace TMG.OntologyTests.Foundational.UnitsOfMeasure.Time
+namespace TMG.iCity.Foundational.UnitsOfMeasure.Time
 {
     [TestClass]
     public class TestTimeUnits
