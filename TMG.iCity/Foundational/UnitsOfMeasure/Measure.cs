@@ -69,5 +69,15 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure
                 return Amount.GetHashCode() * Unit.GetHashCode();
             }
         }
+
+        public static Measure operator+(Measure lhs, Measure rhs)
+        {
+            return lhs.Unit.Add(lhs, rhs);
+        }
+        
+        public static Measure operator -(Measure lhs, Measure rhs)
+        {
+            return lhs.Unit.Subtract(lhs, rhs);
+        }
     }
 }

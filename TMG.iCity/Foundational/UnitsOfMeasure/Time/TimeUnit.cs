@@ -65,5 +65,15 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Time
             }
             return numerator.ScaleToMinute / denominator.ScaleToMinute;
         }
+
+        public override Measure Add(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount + Convert((TimeUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
+
+        public override Measure Subtract(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount - Convert((TimeUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
     }
 }

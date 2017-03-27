@@ -65,5 +65,15 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Length
             // otherwise this operation is not supported
             throw new NotSupportedException($"You can not convert a ${original.Unit.GetType().FullName} as a Legnth!");
         }
+
+        public override Measure Add(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount + Convert((LengthUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
+
+        public override Measure Subtract(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount - Convert((LengthUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
     }
 }

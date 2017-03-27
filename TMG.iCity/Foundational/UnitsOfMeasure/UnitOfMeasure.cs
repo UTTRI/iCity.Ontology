@@ -29,6 +29,20 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure
     /// </summary>
     public abstract class UnitOfMeasure
     {
-        
+        /// <summary>
+        /// Attempt to add the two measurements
+        /// </summary>
+        /// <param name="lhs">The first measurement to add</param>
+        /// <param name="rhs">The second measurement to add</param>
+        /// <returns>A new measurement that is the combination of the two.</returns>
+        public abstract Measure Add(Measure lhs, Measure rhs);
+
+        /// <summary>
+        /// Attempt to subtract the two measurements
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public abstract Measure Subtract(Measure lhs, Measure rhs);
     }
 }

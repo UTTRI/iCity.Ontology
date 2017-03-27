@@ -26,6 +26,30 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Mass
 {
     public abstract class MassUnit : UnitOfMeasure
     {
-        
+
+        protected abstract double ScaleToGram { get; }
+
+        public static Measure Convert(MassUnit toType, Measure original)
+        {
+            if (original.Unit == toType)
+            {
+                return original;
+            }
+            if (original.Unit is MassUnit originalUnit)
+            {
+                return new Measure(original.Amount * (originalUnit.ScaleToGram / toType.ScaleToGram), toType);
+            }
+            throw new NotSupportedException($"You can not convert a ${original.Unit.GetType().FullName} as a Speed!");
+        }
+
+        public override Measure Add(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount + Convert((MassUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
+
+        public override Measure Subtract(Measure lhs, Measure rhs)
+        {
+            return new Measure(lhs.Amount - Convert((MassUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+        }
     }
 }
