@@ -41,5 +41,15 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Speed
         {
 
         }
+
+        /// <summary>
+        /// Create a measurement for the given unit
+        /// </summary>
+        /// <param name="ammount">The amount of the unit to create</param>
+        /// <returns>A new measurement of this unit type</returns>
+        public static Measure Create(double ammount)
+        {
+            return new Measure(ammount, Reference);
+        }
     }
 }
