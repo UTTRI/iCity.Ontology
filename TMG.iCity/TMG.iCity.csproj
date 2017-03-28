@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Foundational\Value\" />
+    <Folder Include="Foundational\Mereology\" />
     <Folder Include="UrbanSystem\Building\" />
     <Folder Include="UrbanSystem\Household\" />
     <Folder Include="UrbanSystem\LandUse\" />

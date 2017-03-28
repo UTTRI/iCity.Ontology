@@ -19,6 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Activity;
+using TMG.iCity.Foundational.SpatialLocation;
 using TMG.iCity.Foundational.Time;
 using TMG.iCity.Foundational.UnitsOfMeasure;
 
@@ -33,5 +35,15 @@ namespace TMG.iCity.Foundational.Resource
         public DivisibleResource(T partOf, Interval temporalExtent, Measure capacity, Measure capacityInUse) : base(partOf, temporalExtent, capacity, capacityInUse)
         {
         }
+
+        public override SpatialFeature Location => throw new NotImplementedException();
+
+        public override IList<ActivityOccurrence> PartisipatesIn => throw new NotImplementedException();
+
+        public override IList<ActivityOccurrence> UsedIn => throw new NotImplementedException();
+
+        public override IList<ActivityOccurrence> ConsumedIn => throw new NotImplementedException();
+
+        public override ResourceType ResourceType => throw new NotImplementedException();
     }
 }
