@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UrbanSystem\Building\" />
     <Folder Include="UrbanSystem\LandUse\" />
     <Folder Include="UrbanSystem\Transit\" />
     <Folder Include="UrbanSystem\TransportationNetwork\" />
