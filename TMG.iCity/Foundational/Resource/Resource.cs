@@ -19,10 +19,40 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Activity;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.SpatialLocation;
+using TMG.iCity.Foundational.Time;
+using TMG.iCity.Foundational.UnitsOfMeasure;
 
 namespace TMG.iCity.Foundational.Resource
 {
-    public class Resource
+    public abstract class Resource<T> : Manifestation<T>
     {
+        public Resource(T partOf, Interval temporalExtent, Measure capacity, Measure capacityInUse) : base(partOf, temporalExtent)
+        {
+            CapacityInUse = capacityInUse;
+            Capacity = capacity;
+        }
+
+        public Resource(T partOf, Interval temporalExtent, Measure capacity) : base(partOf, temporalExtent)
+        {
+            Capacity = capacity;
+            CapacityInUse = new Measure(0.0, capacity.Unit);
+        }
+
+        public Measure Capacity { get; protected set; }
+
+        public Measure CapacityInUse { get; protected set; }
+
+        public abstract SpatialFeature Location { get; }
+
+        public abstract IList<ActivityOccurrence> PartisipatesIn { get; }
+
+        public abstract IList<ActivityOccurrence> UsedIn { get; }
+
+        public abstract IList<ActivityOccurrence> ConsumedIn { get; }
+
+        public abstract ResourceType ResourceType { get; }
     }
 }
