@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="UrbanSystem\Building\" />
-    <Folder Include="UrbanSystem\Household\" />
     <Folder Include="UrbanSystem\LandUse\" />
     <Folder Include="UrbanSystem\Organization\" />
     <Folder Include="UrbanSystem\Transit\" />

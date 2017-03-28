@@ -23,13 +23,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.Monetary;
+using TMG.iCity.UrbanSystem.Household;
 
 namespace TMG.iCity.UrbanSystem.Person
 {
-    public class Person : Manifestation<PersonPD>
+    public sealed class Person : Manifestation<PersonPD>
     {
 
-        public Person(Interval at) : this(new PersonPD(), at)
+        public Person(Interval at, long personId, Sex sex, Instant birthDate) 
+            : this(new PersonPD(personId, sex, birthDate), at)
         {
 
         }
@@ -38,10 +41,36 @@ namespace TMG.iCity.UrbanSystem.Person
         {
 
         }
+
+        public List<Qualification> Qualifications { get; } = new List<Qualification>();
+
+        public List<Skill> Skills { get; } = new List<Skill>();
+
+        public MonetaryValue Income { get; private set; }
+
+        public Instant DeathDate { get; private set; }
+
+        public List<Person> Children { get; private set; } = new List<Person>();
+
+        public List<Person> Parents { get; } = new List<Person>();
+
+        public Family Family { get; private set; }
+
     }
 
-    public class PersonPD : TimeVaryingConcept<PersonPD, Person>
+    public sealed class PersonPD : TimeVaryingConcept<PersonPD, Person>
     {
-        
+        public long PersonID { get; private set; }
+
+        public Sex Sex { get; private set; }
+
+        public Instant BirthDate { get; private set; }
+
+        public PersonPD(long personId, Sex sex, Instant birthDate)
+        {
+            PersonID = personId;
+            Sex = sex;
+            BirthDate = birthDate;
+        }
     }
 }
