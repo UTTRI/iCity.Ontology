@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure;
+using TMG.iCity.Foundational.UnitsOfMeasure.Time;
 
 namespace TMG.iCity.Foundational.Time
 {
@@ -29,9 +31,9 @@ namespace TMG.iCity.Foundational.Time
     /// </summary>
     public sealed class Instant : TemporalEntity
     {
-        public DateTime Time { get; private set; }
+        public DateTimeDescription Time { get; private set; }
 
-        public Instant(DateTime time)
+        public Instant(DateTimeDescription time)
         {
             Time = time;
         }
@@ -44,11 +46,11 @@ namespace TMG.iCity.Foundational.Time
             }
         }
 
-        public override TimeSpan HasDuration
+        public override Measure HasDuration
         {
             get
             {
-                return TimeSpan.Zero;
+                return new Measure(0.0f, MinuteUnit.Reference);
             }
         }
 
@@ -95,7 +97,7 @@ namespace TMG.iCity.Foundational.Time
             }
             if (other is Interval interval)
             {
-                return Time == interval.Start && interval.HasDuration == TimeSpan.Zero;
+                return Time == interval.Start && interval.HasDuration.Amount == 0.0;
             }
             return false;
         }
@@ -121,7 +123,7 @@ namespace TMG.iCity.Foundational.Time
         /// <param name="us">The Instant in question.</param>
         /// <param name="delta">The delta to apply to the instant.</param>
         /// <returns>A new instant with the given shift</returns>
-        public static Instant operator+(Instant us, TimeSpan delta)
+        public static Instant operator+(Instant us, Measure delta)
         {
             if (us == null)
             {
@@ -139,7 +141,7 @@ namespace TMG.iCity.Foundational.Time
         /// </summary>
         /// <param name="delta">The delta to apply to the instant.</param>
         /// <returns>A new instant with the given shift</returns>
-        public Instant Add(TimeSpan delta)
+        public Instant Add(Measure delta)
         {
             return this + delta;
         }
@@ -150,7 +152,7 @@ namespace TMG.iCity.Foundational.Time
         /// <param name="us">The Instant in question.</param>
         /// <param name="delta">The delta to apply to the instant.</param>
         /// <returns>A new instant with the opposite of the given shift</returns>
-        public static Instant operator -(Instant us, TimeSpan delta)
+        public static Instant operator -(Instant us, Measure delta)
         {
             if(us == null)
             {
@@ -168,9 +170,9 @@ namespace TMG.iCity.Foundational.Time
         /// </summary>
         /// <param name="delta">The delta to apply to the instant.</param>
         /// <returns>A new instant with the opposite of the given shift</returns>
-        public Instant Subtract(TimeSpan delta)
+        public Instant Subtract(Measure delta)
         {
-            return this - delta;
+            return new Instant(Time - delta);
         }
     }
 }

@@ -24,6 +24,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMG.iCity;
+using TMG.iCity.Foundational.UnitsOfMeasure;
+using TMG.iCity.Foundational.UnitsOfMeasure.Time;
 
 namespace TMG.Ontology.Foundational.Time.Tests
 {
@@ -82,9 +84,9 @@ namespace TMG.Ontology.Foundational.Time.Tests
         {
             var now = DateTime.Now;
             var baseTime = new Instant(now);
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3));
+            var plusFiveMinutes = new Interval(now, MinuteUnit.Create(5.0));
+            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, MinuteUnit.Create(5.0));
+            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), MinuteUnit.Create(3.0));
             Assert.IsFalse(baseTime.Before(plusFiveMinutes));
             Assert.IsTrue(baseTime.Before(plusFiveMinutesAfter));
             Assert.IsFalse(baseTime.Before(plusFiveMinutesBefore));
@@ -95,9 +97,9 @@ namespace TMG.Ontology.Foundational.Time.Tests
         {
             var now = DateTime.Now;
             var baseTime = new Instant(now);
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(3));
+            var plusFiveMinutes = new Interval(now, MinuteUnit.Create(5.0));
+            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, MinuteUnit.Create(5.0));
+            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - MinuteUnit.Create(5.0), MinuteUnit.Create(3.0));
             Assert.IsFalse(baseTime.After(plusFiveMinutes));
             Assert.IsFalse(baseTime.After(plusFiveMinutesAfter));
             Assert.IsTrue(baseTime.After(plusFiveMinutesBefore));
@@ -108,10 +110,10 @@ namespace TMG.Ontology.Foundational.Time.Tests
         {
             var now = DateTime.Now;
             var baseTime = new Instant(now);
-            var baseInterval = new Interval(now, TimeSpan.FromMinutes(0));
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, TimeSpan.FromMinutes(5));
-            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var baseInterval = new Interval(now, MinuteUnit.Create(0));
+            var plusFiveMinutes = new Interval(now, MinuteUnit.Create(5));
+            var plusFiveMinutesAfter = new Interval(plusFiveMinutes.End, MinuteUnit.Create(5));
+            var plusFiveMinutesBefore = new Interval(plusFiveMinutes.Start - TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
             Assert.IsFalse(baseTime.Equals(plusFiveMinutes));
             Assert.IsFalse(baseTime.Equals(plusFiveMinutesAfter));
             Assert.IsFalse(baseTime.Equals(plusFiveMinutesBefore));
@@ -125,7 +127,7 @@ namespace TMG.Ontology.Foundational.Time.Tests
             var baseTime = new Instant(now);
             var baseTimePlusTwoMinutes = new Instant(now + TimeSpan.FromMinutes(2));
             var baseTimePlusFiveMinutes = new Instant(now + TimeSpan.FromMinutes(5));
-            var plusFiveMinutes = new Interval(now, TimeSpan.FromMinutes(5));
+            var plusFiveMinutes = new Interval(now, MinuteUnit.Create(5));
             Assert.IsFalse(baseTime.Inside(plusFiveMinutes));
             Assert.IsFalse(baseTimePlusFiveMinutes.Inside(plusFiveMinutes));
             Assert.IsTrue(baseTimePlusTwoMinutes.Inside(plusFiveMinutes));

@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure.Time;
 
 namespace TMG.iCity.Foundational.Time.Tests
 {
@@ -32,18 +33,18 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void IntervalTest()
         {
             var baseTime = DateTime.Now;
-            var interval = new Interval(baseTime, TimeSpan.FromMinutes(5));
+            var interval = new Interval(baseTime, MinuteUnit.Create(5));
             Assert.AreEqual(baseTime, interval.Start);
             Assert.AreEqual(baseTime + TimeSpan.FromMinutes(5), interval.End);
-            Assert.AreEqual(TimeSpan.FromMinutes(5), interval.End - interval.Start);
+            Assert.AreEqual(MinuteUnit.Create(5), interval.End - interval.Start);
         }
 
         [TestMethod()]
         public void BeforeTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
             Assert.IsTrue(baseInterval.Before(after5));
             Assert.IsFalse(baseInterval.Before(baseInterval));
             Assert.IsFalse(after5.Before(baseInterval));
@@ -53,8 +54,8 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void AfterTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
             Assert.IsFalse(baseInterval.After(after5));
             Assert.IsFalse(baseInterval.After(baseInterval));
             Assert.IsTrue(after5.After(baseInterval));
@@ -64,9 +65,9 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void DuringTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), MinuteUnit.Create(2));
             Assert.IsFalse(baseInterval.During(after5));
             Assert.IsFalse(baseInterval.During(baseInterval));
             Assert.IsFalse(baseInterval.During(after2));
@@ -79,9 +80,9 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void EqualsTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var baseIntervalClone = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var baseIntervalClone = new Interval(baseTime, MinuteUnit.Create(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
             Assert.IsFalse(baseInterval.Equals(after5));
             Assert.IsTrue(baseInterval.Equals(baseInterval));
             Assert.IsTrue(baseInterval.Equals(baseIntervalClone));
@@ -92,10 +93,10 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void FinishesTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var elongated = new Interval(baseTime - TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var elongated = new Interval(baseTime - TimeSpan.FromMinutes(5), MinuteUnit.Create(10));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), MinuteUnit.Create(2));
             Assert.IsFalse(baseInterval.Finishes(after5));
             Assert.IsFalse(baseInterval.Finishes(baseInterval));
             Assert.IsFalse(after5.Finishes(baseInterval));
@@ -109,9 +110,9 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void OverlapsTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), MinuteUnit.Create(2));
             Assert.IsFalse(baseInterval.Overlaps(after5));
             Assert.IsTrue(baseInterval.Overlaps(baseInterval));
             Assert.IsTrue(baseInterval.Overlaps(after2));
@@ -124,10 +125,10 @@ namespace TMG.iCity.Foundational.Time.Tests
         public void StartsTest()
         {
             var baseTime = DateTime.Now;
-            var baseInterval = new Interval(baseTime, TimeSpan.FromMinutes(5));
-            var elongatedBaseInterval = new Interval(baseTime, TimeSpan.FromMinutes(10));
-            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
-            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+            var baseInterval = new Interval(baseTime, MinuteUnit.Create(5));
+            var elongatedBaseInterval = new Interval(baseTime, MinuteUnit.Create(10));
+            var after5 = new Interval(baseTime + TimeSpan.FromMinutes(5), MinuteUnit.Create(5));
+            var after2 = new Interval(baseTime + TimeSpan.FromMinutes(2), MinuteUnit.Create(2));
             Assert.IsFalse(baseInterval.Starts(after5));
             Assert.IsFalse(baseInterval.Starts(baseInterval));
             Assert.IsFalse(after5.Starts(baseInterval));

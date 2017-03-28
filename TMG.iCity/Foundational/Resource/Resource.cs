@@ -18,29 +18,11 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Time
+namespace TMG.iCity.Foundational.Resource
 {
-    /// <summary>
-    /// Represents a unit for a minute of time
-    /// </summary>
-    public sealed class MinuteUnit : TimeUnit
+    public class Resource
     {
-        public static readonly MinuteUnit Reference = new MinuteUnit();
-
-        protected override double ScaleToMinute => 1.0f;
-
-        private MinuteUnit()
-        {
-
-        }
-
-        public static Measure Create(double timeInMinutes)
-        {
-            return new Measure(timeInMinutes, Reference);
-        }
     }
 }

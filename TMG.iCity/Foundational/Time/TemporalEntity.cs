@@ -22,6 +22,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.UnitsOfMeasure;
+using TMG.iCity.Foundational.UnitsOfMeasure.Time;
 
 namespace TMG.iCity.Foundational.Time
 {
@@ -43,7 +45,7 @@ namespace TMG.iCity.Foundational.Time
         /// <summary>
         /// The entity has a duration
         /// </summary>
-        public abstract TimeSpan HasDuration { get; }
+        public abstract Measure HasDuration { get; }
 
         /// <summary>
         /// Does this even occur before the given entity.

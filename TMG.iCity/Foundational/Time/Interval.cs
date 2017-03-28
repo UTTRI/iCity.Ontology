@@ -22,25 +22,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.iCity.Foundational.UnitsOfMeasure;
 
 namespace TMG.iCity.Foundational.Time
 {
     public sealed class Interval : TemporalEntity
     {
-        public DateTime Start { get; private set; }
+        public DateTimeDescription Start { get; private set; }
 
-        private readonly TimeSpan Duration;
+        private readonly Measure Duration;
 
-        public DateTime End { get { return Start + Duration; } }
+        public DateTimeDescription End { get { return Start + Duration; } }
 
         /// <summary>
         /// Create a new time interval
         /// </summary>
         /// <param name="start">The start time of the interval</param>
         /// <param name="duration">The duration of the interval. Must not be negative!</param>
-        public Interval(DateTime start, TimeSpan duration)
+        public Interval(DateTimeDescription start, Measure duration)
         {
-            if(duration < TimeSpan.Zero)
+            if(duration.Amount < 0.0)
             {
                 throw new ArgumentOutOfRangeException(nameof(duration), "Durations must not be negative!");
             }
@@ -56,7 +57,7 @@ namespace TMG.iCity.Foundational.Time
             }
         }
 
-        public override TimeSpan HasDuration
+        public override Measure HasDuration
         {
             get
             {
@@ -172,7 +173,7 @@ namespace TMG.iCity.Foundational.Time
             }
             if (other is Instant instant)
             {
-                return Duration == TimeSpan.Zero && Start == instant.Time;
+                return Duration.Amount == 0.0 && Start == instant.Time;
             }
             if (other is Interval interval)
             {
