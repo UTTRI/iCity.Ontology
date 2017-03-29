@@ -20,12 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transport
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public abstract class TransportationComplex
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
-
-        protected override double ScaleToDollar => 1.0;
     }
 }

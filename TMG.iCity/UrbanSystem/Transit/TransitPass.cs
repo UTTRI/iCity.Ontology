@@ -19,13 +19,19 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Monetary;
+using TMG.iCity.Foundational.Time;
+using TMG.iCity.Foundational.UnitsOfMeasure.Currency;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class TransitPass : AccessMethod
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public List<Operator> AppliesToOperators { get; }
 
-        protected override double ScaleToDollar => 1.0;
+        public TransitPass(List<Operator> appliesToOperators) : base(new MonetaryValue(0, 0, DollarUnit.Reference), DurationDescription.Infinity)
+        {
+            AppliesToOperators = appliesToOperators;
+        }
     }
 }

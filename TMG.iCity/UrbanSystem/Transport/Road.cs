@@ -24,5 +24,8 @@ namespace TMG.iCity.UrbanSystem.Transport
 {
     public class Road
     {
+        public RoadId Id { get; private set; }
+
+        public List<RoadSegment> Segments { get; } = new List<RoadSegment>();
     }
 }

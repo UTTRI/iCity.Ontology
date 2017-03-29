@@ -19,13 +19,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Monetary;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public abstract class AccessMethod
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public MonetaryValue MonataryCost { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public DurationDescription ValidFor { get; private set; }
+
+        public AccessMethod(MonetaryValue cost, DurationDescription duration)
+        {
+            MonataryCost = cost ?? throw new ArgumentNullException(nameof(cost));
+            ValidFor = duration ?? throw new ArgumentNullException(nameof(duration));
+        }
     }
 }

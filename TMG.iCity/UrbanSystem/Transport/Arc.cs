@@ -19,14 +19,40 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.Time;
 
 namespace TMG.iCity.UrbanSystem.Transport
 {
-    public class Arc
+    public sealed class Arc : Manifestation<ArcPD>
     {
+        /// <summary>
+        /// The origin of the arc
+        /// </summary>
+        public Node StartNode { get; private set; }
+
+        /// <summary>
+        /// The destination of the arc
+        /// </summary>
+        public Node EndNode { get; private set; }
+
+
+        public Arc(ArcPD arcPD, Interval at, Node startNode, Node endNode) : base(arcPD, at)
+        {
+            StartNode = startNode;
+            EndNode = endNode;
+        }
+
+        public Arc(Interval at, Node startNode, Node endNode) : this(new ArcPD(), at, startNode, endNode)
+        {
+
+        }
+
+        public TransportationComplex AccessesComplex { get; private set; }
+
     }
 
-    public class ArcPD
+    public class ArcPD : TimeVaryingConcept<ArcPD, Arc>
     {
 
     }

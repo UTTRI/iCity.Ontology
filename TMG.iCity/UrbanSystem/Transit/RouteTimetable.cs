@@ -19,13 +19,27 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">Should be either Route or RouteLink</typeparam>
+    public class RouteTimetable<T> where T : class
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public T TimetableFor { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public DateTimeDescription ArrivalTime { get; private set; }
+
+        public DurationDescription TravelTime { get; private set; }
+
+        public RouteTimetable(T timetableFor, DateTimeDescription arrivalTime, DurationDescription travelTime)
+        {
+            TimetableFor = timetableFor;
+            ArrivalTime = arrivalTime;
+            TravelTime = travelTime;
+        }
     }
 }

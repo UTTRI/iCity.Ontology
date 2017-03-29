@@ -23,6 +23,9 @@ using System.Text;
 
 namespace TMG.iCity.Foundational.Mereology
 {
+    /// <summary>
+    /// Do not use this class.  Instead look at it for understanding of what a thing should be.
+    /// </summary>
     public abstract class Thing
     {
         public Thing PartOf { get; private set; }
@@ -30,6 +33,14 @@ namespace TMG.iCity.Foundational.Mereology
         public List<Thing> ProperParts { get; } = new List<Thing>();
 
         public List<Thing> Components { get; } = new List<Thing>();
+
+        /// <summary>
+        /// This ensures no one can create a subclass of Thing
+        /// </summary>
+        private Thing()
+        {
+
+        }
 
         public bool HasProperPart(Thing thing)
         {

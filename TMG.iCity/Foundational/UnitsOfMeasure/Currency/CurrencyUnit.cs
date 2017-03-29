@@ -22,7 +22,7 @@ using System.Text;
 
 namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
 {
-    public abstract class CurrenyUnit : UnitOfMeasure
+    public abstract class CurrencyUnit : UnitOfMeasure
     {
 
         protected abstract double ScaleToDollar { get; }
@@ -33,7 +33,7 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
         /// <param name="toType">The type of length measurement to convert it to</param>
         /// <param name="original">The original measure</param>
         /// <returns>A new measure in the given units</returns>
-        public static Measure Convert(CurrenyUnit toType, Measure original)
+        public static Measure Convert(CurrencyUnit toType, Measure original)
         {
             // if we are already in the correct unit, we are done
             if (original.Unit == toType)
@@ -41,7 +41,7 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
                 return original;
             }
             // make sure that we are dealing with a measure working with lengths, and if so do the conversion
-            if (original.Unit is CurrenyUnit originalLengthUnit)
+            if (original.Unit is CurrencyUnit originalLengthUnit)
             {
                 return new Measure(original.Amount * (originalLengthUnit.ScaleToDollar / toType.ScaleToDollar), toType);
             }
@@ -51,12 +51,12 @@ namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
 
         public override Measure Add(Measure lhs, Measure rhs)
         {
-            return new Measure(lhs.Amount + Convert((CurrenyUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+            return new Measure(lhs.Amount + Convert((CurrencyUnit)lhs.Unit, rhs).Amount, lhs.Unit);
         }
 
         public override Measure Subtract(Measure lhs, Measure rhs)
         {
-            return new Measure(lhs.Amount - Convert((CurrenyUnit)lhs.Unit, rhs).Amount, lhs.Unit);
+            return new Measure(lhs.Amount - Convert((CurrencyUnit)lhs.Unit, rhs).Amount, lhs.Unit);
         }
     }
 }

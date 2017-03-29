@@ -19,13 +19,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class TransitSystem : Manifestation<TransitSystemPD>
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public TransitSystem(TransitSystemPD partOf, Interval temporalExtent) : base(partOf, temporalExtent)
+        {
+        }
+    }
 
-        protected override double ScaleToDollar => 1.0;
+    public class TransitSystemPD : TimeVaryingConcept<TransitSystemPD, TransitSystem>
+    {
+
     }
 }

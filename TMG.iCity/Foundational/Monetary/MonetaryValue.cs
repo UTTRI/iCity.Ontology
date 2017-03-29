@@ -29,9 +29,9 @@ namespace TMG.iCity.Foundational.Monetary
 
         public int RelativeYear { get; private set; }
 
-        public CurrenyUnit Unit { get; private set; }
+        public CurrencyUnit Unit { get; private set; }
 
-        public MonetaryValue(decimal dollarValue, int relativeYear, CurrenyUnit unit)
+        public MonetaryValue(decimal dollarValue, int relativeYear, CurrencyUnit unit)
         {
             DollarValue = dollarValue;
             RelativeYear = relativeYear;

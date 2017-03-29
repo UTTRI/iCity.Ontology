@@ -26,6 +26,11 @@ namespace TMG.iCity.Foundational.Time
 {
     public sealed class DurationDescription : DateTimeDescription
     {
+        /// <summary>
+        /// An infinite duration
+        /// </summary>
+        public static readonly DurationDescription Infinity = new DurationDescription(DateTime.MinValue, double.PositiveInfinity, MinuteUnit.Reference);
+
         public DurationDescription(DateTime time, double ammount, TimeUnit unit) : base(time)
         {
             Duration = new Measure(ammount, unit);

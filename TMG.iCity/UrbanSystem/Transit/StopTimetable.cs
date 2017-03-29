@@ -19,13 +19,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class StopTimetable
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public StopPoint TimetableFor { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public List<DateTimeDescription> ArrivalTime { get; private set; }
+
+        public StopTimetable(StopPoint stop, List<DateTimeDescription> arrivalTimes)
+        {
+            TimetableFor = stop;
+            ArrivalTime = arrivalTimes ?? throw new ArgumentNullException(nameof(arrivalTimes));
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace TMG.iCity.Foundational.Monetary
 {
     public class Rate : MonetaryValue
     {
-        public Rate(decimal dollarValue, int relativeYear, CurrenyUnit unit,
+        public Rate(decimal dollarValue, int relativeYear, CurrencyUnit unit,
             DurationDescription duration)
             : base(dollarValue, relativeYear, unit)
         {

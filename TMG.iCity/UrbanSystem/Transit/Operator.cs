@@ -19,13 +19,34 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class Operator : Manifestation<OperatorPD>
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public List<Route> Routes { get; } = new List<Route>();
 
-        protected override double ScaleToDollar => 1.0;
+        public string OperatorName => PartOf.OperatorName;
+
+        public Operator(OperatorPD partOf, Interval temporalExtent) : base(partOf, temporalExtent)
+        {
+        }
+
+        public Operator(string name, Interval temporalExtent) : base(new OperatorPD(name), temporalExtent)
+        {
+                
+        }
+    }
+
+    public class OperatorPD : TimeVaryingConcept<OperatorPD, Operator>
+    {
+        public string OperatorName { get; private set; }
+
+        internal OperatorPD(string operatorName)
+        {
+            OperatorName = operatorName;
+        }
     }
 }

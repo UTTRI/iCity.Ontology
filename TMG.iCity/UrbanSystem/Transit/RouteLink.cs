@@ -19,13 +19,23 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.UrbanSystem.Transport;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class RouteLink
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public StopPoint BeginsAtStop { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public StopPoint EndsAtStop { get; private set; }
+
+        public List<Arc> GoesThrough { get; private set; }
+
+        public RouteLink(StopPoint beginsAt, StopPoint endsAt, List<Arc> goesThrough)
+        {
+            BeginsAtStop = beginsAt ?? throw new ArgumentNullException(nameof(beginsAt));
+            EndsAtStop = endsAt ?? throw new ArgumentNullException(nameof(endsAt));
+            GoesThrough = goesThrough ?? throw new ArgumentNullException(nameof(goesThrough));
+        }
     }
 }

@@ -19,13 +19,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.SpatialLocation;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class StopPoint
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public SpatialFeature Location { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public StopPoint(SpatialFeature location)
+        {
+            Location = location ?? throw new ArgumentNullException(nameof(location));
+        }
     }
 }

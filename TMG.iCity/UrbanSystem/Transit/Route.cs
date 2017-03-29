@@ -18,14 +18,39 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using TMG.iCity.Foundational.Change;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class Route : Manifestation<RoutePD>
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public Route(RoutePD partOf, Interval temporalExtent) : base(partOf, temporalExtent)
+        {
+        }
 
-        protected override double ScaleToDollar => 1.0;
+        public Route(RouteId id, Interval temporalExtent) : this(new RoutePD(id), temporalExtent)
+        {
+
+        }
+
+        public List<RouteSection> RouteSection { get; } = new List<Transit.RouteSection>();
+
+        public bool Contains(RouteLink link)
+        {
+            return RouteSection.Any(section => section.Contains(link));
+        }
+    }
+
+    public class RoutePD : TimeVaryingConcept<RoutePD, Route>
+    {
+        public RouteId RouteId { get; private set; }
+
+        public RoutePD(RouteId id)
+        {
+
+        }
     }
 }

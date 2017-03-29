@@ -26,10 +26,10 @@ using System.Collections;
 
 namespace TMG.iCity.Foundational.Change
 {
-    public abstract class TimeVaryingConcept<T, K>
-        where K : Manifestation<T>
+    public abstract class TimeVaryingConcept<BaseClass, VaryingClass>
+        where VaryingClass : Manifestation<BaseClass>
     {
-        private List<K> Manifistations { get; } = new List<K>();
+        private List<VaryingClass> Manifistations { get; } = new List<VaryingClass>();
 
         /// <summary>
         /// 
@@ -67,7 +67,7 @@ namespace TMG.iCity.Foundational.Change
         /// </summary>
         /// <param name="manifestation"></param>
         /// <returns></returns>
-        public bool HasManifestation(K manifestation)
+        public bool HasManifestation(VaryingClass manifestation)
         {
             if(manifestation == null)
             {

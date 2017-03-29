@@ -19,13 +19,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TMG.iCity.Foundational.Monetary;
+using TMG.iCity.Foundational.Time;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class Fare : AccessMethod
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
-
-        protected override double ScaleToDollar => 1.0;
+        public Fare(MonetaryValue cost, DurationDescription duration) : base(cost, duration)
+        {
+        }
     }
 }

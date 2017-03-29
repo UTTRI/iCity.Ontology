@@ -20,12 +20,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TMG.iCity.Foundational.UnitsOfMeasure.Currency
+namespace TMG.iCity.UrbanSystem.Transit
 {
-    public sealed class DollarUnit : CurrencyUnit
+    public class RouteSection
     {
-        public static readonly DollarUnit Reference = new DollarUnit();
+        public List<RouteLink> Links { get; private set; }
 
-        protected override double ScaleToDollar => 1.0;
+        public RouteSection(List<RouteLink> links)
+        {
+            Links = links;
+        }
+
+        public bool Contains(RouteLink link)
+        {
+            return Links.Contains(link);
+        }
     }
 }
