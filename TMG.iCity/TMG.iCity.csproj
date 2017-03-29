@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="UrbanSystem\LandUse\" />
-    <Folder Include="UrbanSystem\Transit\" />
-    <Folder Include="UrbanSystem\TransportationNetwork\" />
     <Folder Include="UrbanSystem\Vehicle\" />
   </ItemGroup>
 
